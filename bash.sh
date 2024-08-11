@@ -8,7 +8,7 @@ singularity exec -e /app1/common/singularity-img/3.0.0/pytorch_2.0_cuda_12.0_cud
 
 export PYTHONPATH=$PYTHONPATH:/home/svu/e1100476/Packages/lib/python3.11/site-packages
 
-python main_pretrain.py
+nohup python main_pretrain.py &
 
 EOF
 
