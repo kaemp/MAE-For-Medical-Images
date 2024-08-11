@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/home/svu/e1100476/Project/SSL/mae/main_pretrain.py", line 21, in <module>
+    from torch.utils.tensorboard import SummaryWriter
+  File "/usr/local/lib/python3.10/dist-packages/torch/utils/tensorboard/__init__.py", line 12, in <module>
+    from .writer import FileWriter, SummaryWriter  # noqa: F401
+  File "/usr/local/lib/python3.10/dist-packages/torch/utils/tensorboard/writer.py", line 9, in <module>
+    from tensorboard.compat.proto.event_pb2 import SessionLog
+  File "/home/svu/e1100476/Packages/lib/python3.11/site-packages/tensorboard/compat/proto/event_pb2.py", line 5, in <module>
+    from google.protobuf.internal import enum_type_wrapper
+ModuleNotFoundError: No module named 'google'

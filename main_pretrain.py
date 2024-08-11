@@ -24,7 +24,7 @@ import torchvision.datasets as datasets
 
 import timm
 
-assert timm.__version__ == "0.3.2"  # version check
+# assert timm.__version__ == "0.3.2"  # version check
 import timm.optim.optim_factory as optim_factory
 
 import util.misc as misc
@@ -44,7 +44,7 @@ def get_args_parser():
                         help='Accumulate gradient iterations (for increasing the effective batch size under memory constraints)')
 
     # Model parameters
-    parser.add_argument('--model', default='mae_vit_large_patch16', type=str, metavar='MODEL',
+    parser.add_argument('--model', default='mae_vit_base_patch16', type=str, metavar='MODEL',
                         help='Name of model to train')
 
     parser.add_argument('--input_size', default=224, type=int,
@@ -72,12 +72,12 @@ def get_args_parser():
                         help='epochs to warmup LR')
 
     # Dataset parameters
-    parser.add_argument('--data_path', default='/datasets01/imagenet_full_size/061417/', type=str,
+    parser.add_argument('--data_path', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Dataset/retina images/pretrain', type=str,
                         help='dataset path')
 
-    parser.add_argument('--output_dir', default='./output_dir',
+    parser.add_argument('--output_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/original_mask_ratio_.75',
                         help='path where to save, empty for no saving')
-    parser.add_argument('--log_dir', default='./output_dir',
+    parser.add_argument('--log_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/original_mask_ratio_.75',
                         help='path where to tensorboard log')
     parser.add_argument('--device', default='cuda',
                         help='device to use for training / testing')
@@ -125,7 +125,7 @@ def main(args):
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])
-    dataset_train = datasets.ImageFolder(os.path.join(args.data_path, 'train'), transform=transform_train)
+    dataset_train = datasets.ImageFolder(os.path.join(args.data_path), transform=transform_train)
     print(dataset_train)
 
     if True:  # args.distributed:
