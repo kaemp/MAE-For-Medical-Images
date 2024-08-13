@@ -32,7 +32,7 @@ from util.misc import NativeScalerWithGradNormCount as NativeScaler
 
 import models_mae_v1
 
-from engine_pretrain import train_one_epoch
+from engine_pretrain_v1 import train_one_epoch
 
 
 def get_args_parser():
@@ -57,6 +57,9 @@ def get_args_parser():
                         help='Use (per-patch) normalized pixels as targets for computing loss')
     parser.set_defaults(norm_pix_loss=False)
 
+    parser.add_argument('--momentum', default=0.999, type=float,
+                        help='momentum term for updating ContextEncoder')
+
     # Optimizer parameters
     parser.add_argument('--weight_decay', type=float, default=0.05,
                         help='weight decay (default: 0.05)')
@@ -75,9 +78,9 @@ def get_args_parser():
     parser.add_argument('--data_path', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Dataset/retina images/pretrain', type=str,
                         help='dataset path')
 
-    parser.add_argument('--output_dir', default='./output_dir',
+    parser.add_argument('--output_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/v1_.75',
                         help='path where to save, empty for no saving')
-    parser.add_argument('--log_dir', default='./output_dir',
+    parser.add_argument('--log_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/v1_.75',
                         help='path where to tensorboard log')
     parser.add_argument('--device', default='cuda',
                         help='device to use for training / testing')
@@ -176,7 +179,7 @@ def main(args):
         model_without_ddp = model.module
     
     # following timm: set wd as 0 for bias and norm layers
-    param_groups = optim_factory.add_weight_decay(model_without_ddp, args.weight_decay)
+    param_groups = optim_factory.param_groups_weight_decay(model_without_ddp, args.weight_decay)
     optimizer = torch.optim.AdamW(param_groups, lr=args.lr, betas=(0.9, 0.95))
     print(optimizer)
     loss_scaler = NativeScaler()
