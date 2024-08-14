@@ -1,0 +1,14 @@
+      ======================================================================================
+     Resource Usage on 2024-08-14 15:16:32.606648:
+     JobId: 9445342.venus01  				 Project: MAE 
+     Submission Host: atlas8-c01 
+     Exit Status: 0
+     NCPUs Requested: 10 				 NCPUs Used: 10
+     Memory Requested: 80gb 				 Memory Used: 33938232kb 
+     Vmem Used: 315293152kb
+     CPU Time Used: 00:37:57 
+     Walltime requested: 24:00:00 			 Walltime Used: 00:23:23
+     Submit Time:  Wed Aug 14 14:53:04 2024 		 Start Time: Wed Aug 14 14:53:09 2024 
+     End Time: Wed Aug 14 15:16:32 2024 
+     Execution Nodes Used: (volta06:ncpus=10:mem=83886080kb:ngpus=1)
+     ======================================================================================

@@ -41,7 +41,7 @@ from engine_finetune import train_one_epoch, evaluate
 
 def get_args_parser():
     parser = argparse.ArgumentParser('MAE linear probing for image classification', add_help=False)
-    parser.add_argument('--batch_size', default=128, type=int,
+    parser.add_argument('--batch_size', default=512, type=int,
                         help='Batch size per GPU (effective batch size is batch_size * accum_iter * # gpus')
     parser.add_argument('--epochs', default=90, type=int)
     parser.add_argument('--accum_iter', default=1, type=int,
@@ -67,7 +67,7 @@ def get_args_parser():
                         help='epochs to warmup LR')
 
     # * Finetuning params
-    parser.add_argument('--finetune', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/original_mask_ratio_.75/checkpoint-399.pth',
+    parser.add_argument('--finetune', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/v2_.75/checkpoint-399.pth',
                         help='finetune from checkpoint')
     parser.add_argument('--global_pool', action='store_true')
     parser.set_defaults(global_pool=False)
@@ -80,9 +80,9 @@ def get_args_parser():
     parser.add_argument('--nb_classes', default=5, type=int,
                         help='number of the classification types')
 
-    parser.add_argument('--output_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/original_mask_ratio_.75/linprobe',
+    parser.add_argument('--output_dir', default='./output',
                         help='path where to save, empty for no saving')
-    parser.add_argument('--log_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/original_mask_ratio_.75/linprobe',
+    parser.add_argument('--log_dir', default='./output',
                         help='path where to tensorboard log')
     parser.add_argument('--device', default='cuda',
                         help='device to use for training / testing')
@@ -193,7 +193,7 @@ def main(args):
 
     if args.finetune and not args.eval:
         checkpoint = torch.load(args.finetune, map_location='cpu')
-
+        print(checkpoint)
         print("Load pre-trained checkpoint from: %s" % args.finetune)
         checkpoint_model = checkpoint['model']
         state_dict = model.state_dict()

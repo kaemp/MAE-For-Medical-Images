@@ -1,0 +1,1452 @@
+Not using distributed mode
+[14:53:16.424076] job dir: /home/svu/e1100476/Project/SSL/mae
+[14:53:16.424126] Namespace(batch_size=128,
+epochs=90,
+accum_iter=1,
+model='vit_base_patch16',
+weight_decay=0,
+lr=None,
+blr=0.1,
+min_lr=0.0,
+warmup_epochs=10,
+finetune='',
+global_pool=False,
+data_path='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Dataset/retina images/linprobe',
+nb_classes=5,
+output_dir='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised',
+log_dir='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised',
+device='cuda',
+seed=0,
+resume='',
+start_epoch=0,
+eval=False,
+dist_eval=False,
+num_workers=10,
+pin_mem=True,
+world_size=1,
+local_rank=-1,
+dist_on_itp=False,
+dist_url='env://',
+distributed=False)
+[14:53:16.952173] Dataset ImageFolder
+    Number of datapoints: 2929
+    Root location: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Dataset/retina images/linprobe/train
+    StandardTransform
+Transform: Compose(
+               RandomResizedCrop(size=(224, 224), scale=(0.08, 1.0), ratio=(0.75, 1.3333), interpolation=bicubic, antialias=warn)
+               RandomHorizontalFlip(p=0.5)
+               ToTensor()
+               Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+           )
+[14:53:16.952284] Dataset ImageFolder
+    Number of datapoints: 733
+    Root location: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Dataset/retina images/linprobe/val
+    StandardTransform
+Transform: Compose(
+               Resize(size=256, interpolation=bicubic, max_size=None, antialias=warn)
+               CenterCrop(size=(224, 224))
+               ToTensor()
+               Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+           )
+[14:53:16.952338] Sampler_train = <torch.utils.data.distributed.DistributedSampler object at 0x2b722bf37c40>
+[14:53:23.010395] Model = VisionTransformer(
+  (patch_embed): PatchEmbed(
+    (proj): Conv2d(3, 768, kernel_size=(16, 16), stride=(16, 16))
+    (norm): Identity()
+  )
+  (pos_drop): Dropout(p=0.0, inplace=False)
+  (patch_drop): Identity()
+  (norm_pre): Identity()
+  (blocks): Sequential(
+    (0): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (1): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (2): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (3): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (4): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (5): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (6): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (7): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (8): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (9): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (10): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+    (11): Block(
+      (norm1): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (attn): Attention(
+        (qkv): Linear(in_features=768, out_features=2304, bias=True)
+        (q_norm): Identity()
+        (k_norm): Identity()
+        (attn_drop): Dropout(p=0.0, inplace=False)
+        (proj): Linear(in_features=768, out_features=768, bias=True)
+        (proj_drop): Dropout(p=0.0, inplace=False)
+      )
+      (ls1): Identity()
+      (drop_path1): Identity()
+      (norm2): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+      (mlp): Mlp(
+        (fc1): Linear(in_features=768, out_features=3072, bias=True)
+        (act): GELU(approximate='none')
+        (drop1): Dropout(p=0.0, inplace=False)
+        (norm): Identity()
+        (fc2): Linear(in_features=3072, out_features=768, bias=True)
+        (drop2): Dropout(p=0.0, inplace=False)
+      )
+      (ls2): Identity()
+      (drop_path2): Identity()
+    )
+  )
+  (norm): LayerNorm((768,), eps=1e-06, elementwise_affine=True)
+  (fc_norm): Identity()
+  (head_drop): Dropout(p=0.0, inplace=False)
+  (head): Sequential(
+    (0): BatchNorm1d(768, eps=1e-06, momentum=0.1, affine=False, track_running_stats=True)
+    (1): Linear(in_features=768, out_features=5, bias=True)
+  )
+)
+[14:53:23.010481] number of params (M): 85.80
+[14:53:23.010504] base lr: 1.00e-01
+[14:53:23.010511] actual lr: 5.00e-02
+[14:53:23.010516] accumulate grad iterations: 1
+[14:53:23.010519] effective batch size: 128
+[14:53:23.010669] LARS (
+Parameter Group 0
+    lr: 0.05
+    momentum: 0.9
+    trust_coefficient: 0.001
+    weight_decay: 0
+)
+[14:53:23.010877] criterion = CrossEntropyLoss()
+[14:53:23.010893] Start training for 90 epochs
+[14:53:23.012263] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:53:32.691389] Epoch: [0]  [ 0/22]  eta: 0:03:32  lr: 0.000000  loss: 1.6075 (1.6075)  time: 9.6769  data: 1.5029  max mem: 8982
+[14:53:38.949783] Epoch: [0]  [20/22]  eta: 0:00:01  lr: 0.004545  loss: 1.6291 (1.6262)  time: 0.3129  data: 0.0001  max mem: 9310
+[14:53:39.262081] Epoch: [0]  [21/22]  eta: 0:00:00  lr: 0.004773  loss: 1.6268 (1.6262)  time: 0.3121  data: 0.0001  max mem: 9310
+[14:53:39.343784] Epoch: [0] Total time: 0:00:16 (0.7423 s / it)
+[14:53:39.343851] Averaged stats: lr: 0.004773  loss: 1.6268 (1.6262)
+[14:53:44.655558] Test:  [0/6]  eta: 0:00:07  loss: 1.5010 (1.5010)  acc1: 36.7188 (36.7188)  acc5: 100.0000 (100.0000)  time: 1.3008  data: 1.1997  max mem: 9310
+[14:53:45.216199] Test:  [5/6]  eta: 0:00:00  loss: 1.6919 (1.6260)  acc1: 10.1562 (25.7844)  acc5: 100.0000 (100.0000)  time: 0.3101  data: 0.2000  max mem: 9310
+[14:53:45.267855] Test: Total time: 0:00:01 (0.3196 s / it)
+[14:53:45.267906] * Acc@1 25.784 Acc@5 100.000 loss 1.626
+[14:53:45.268007] Accuracy of the network on the 733 test images: 25.8%
+[14:53:45.268017] Max accuracy: 25.78%
+[14:53:45.279051] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:53:46.808486] Epoch: [1]  [ 0/22]  eta: 0:00:33  lr: 0.005000  loss: 1.5836 (1.5836)  time: 1.5286  data: 1.1991  max mem: 9310
+[14:53:53.113658] Epoch: [1]  [20/22]  eta: 0:00:00  lr: 0.009545  loss: 1.5125 (1.5268)  time: 0.3152  data: 0.0011  max mem: 9310
+[14:53:53.426779] Epoch: [1]  [21/22]  eta: 0:00:00  lr: 0.009773  loss: 1.5081 (1.5238)  time: 0.3151  data: 0.0011  max mem: 9310
+[14:53:53.499191] Epoch: [1] Total time: 0:00:08 (0.3736 s / it)
+[14:53:53.499256] Averaged stats: lr: 0.009773  loss: 1.5081 (1.5238)
+[14:53:58.711892] Test:  [0/6]  eta: 0:00:07  loss: 1.6453 (1.6453)  acc1: 25.0000 (25.0000)  acc5: 100.0000 (100.0000)  time: 1.2209  data: 1.1245  max mem: 9310
+[14:53:59.172426] Test:  [5/6]  eta: 0:00:00  loss: 1.2347 (1.4377)  acc1: 44.5312 (54.1610)  acc5: 100.0000 (100.0000)  time: 0.2801  data: 0.1875  max mem: 9310
+[14:53:59.224078] Test: Total time: 0:00:01 (0.2896 s / it)
+[14:53:59.224137] * Acc@1 54.161 Acc@5 100.000 loss 1.438
+[14:53:59.224259] Accuracy of the network on the 733 test images: 54.2%
+[14:53:59.224269] Max accuracy: 54.16%
+[14:53:59.230437] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:54:00.563355] Epoch: [2]  [ 0/22]  eta: 0:00:29  lr: 0.010000  loss: 1.4262 (1.4262)  time: 1.3319  data: 1.0068  max mem: 9310
+[14:54:06.921727] Epoch: [2]  [20/22]  eta: 0:00:00  lr: 0.014545  loss: 1.4035 (1.3954)  time: 0.3179  data: 0.0036  max mem: 9310
+[14:54:07.237313] Epoch: [2]  [21/22]  eta: 0:00:00  lr: 0.014773  loss: 1.3919 (1.3924)  time: 0.3174  data: 0.0033  max mem: 9310
+[14:54:07.323967] Epoch: [2] Total time: 0:00:08 (0.3679 s / it)
+[14:54:07.324032] Averaged stats: lr: 0.014773  loss: 1.3919 (1.3924)
+[14:54:12.389237] Test:  [0/6]  eta: 0:00:07  loss: 1.7768 (1.7768)  acc1: 6.2500 (6.2500)  acc5: 100.0000 (100.0000)  time: 1.2139  data: 1.1178  max mem: 9310
+[14:54:12.849796] Test:  [5/6]  eta: 0:00:00  loss: 0.9114 (1.3500)  acc1: 8.5938 (49.6589)  acc5: 100.0000 (100.0000)  time: 0.2790  data: 0.1864  max mem: 9310
+[14:54:12.901960] Test: Total time: 0:00:01 (0.2886 s / it)
+[14:54:12.902015] * Acc@1 49.659 Acc@5 100.000 loss 1.350
+[14:54:12.902128] Accuracy of the network on the 733 test images: 49.7%
+[14:54:12.902138] Max accuracy: 54.16%
+[14:54:12.908868] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:54:14.241896] Epoch: [3]  [ 0/22]  eta: 0:00:29  lr: 0.015000  loss: 1.2884 (1.2884)  time: 1.3299  data: 1.0046  max mem: 9310
+[14:54:20.738101] Epoch: [3]  [20/22]  eta: 0:00:00  lr: 0.019545  loss: 1.3207 (1.3264)  time: 0.3248  data: 0.0108  max mem: 9310
+[14:54:21.050047] Epoch: [3]  [21/22]  eta: 0:00:00  lr: 0.019773  loss: 1.3207 (1.3233)  time: 0.3242  data: 0.0106  max mem: 9310
+[14:54:21.128848] Epoch: [3] Total time: 0:00:08 (0.3736 s / it)
+[14:54:21.128911] Averaged stats: lr: 0.019773  loss: 1.3207 (1.3233)
+[14:54:26.199658] Test:  [0/6]  eta: 0:00:07  loss: 1.8437 (1.8437)  acc1: 5.4688 (5.4688)  acc5: 100.0000 (100.0000)  time: 1.2045  data: 1.1083  max mem: 9310
+[14:54:26.660475] Test:  [5/6]  eta: 0:00:00  loss: 0.7918 (1.3319)  acc1: 5.4688 (49.1132)  acc5: 100.0000 (100.0000)  time: 0.2774  data: 0.1848  max mem: 9310
+[14:54:26.712954] Test: Total time: 0:00:01 (0.2870 s / it)
+[14:54:26.713007] * Acc@1 49.113 Acc@5 100.000 loss 1.332
+[14:54:26.713117] Accuracy of the network on the 733 test images: 49.1%
+[14:54:26.713127] Max accuracy: 54.16%
+[14:54:26.719231] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:54:28.438390] Epoch: [4]  [ 0/22]  eta: 0:00:37  lr: 0.020000  loss: 1.3253 (1.3253)  time: 1.7175  data: 1.3932  max mem: 9310
+[14:54:34.731256] Epoch: [4]  [20/22]  eta: 0:00:00  lr: 0.024545  loss: 1.2808 (1.3044)  time: 0.3146  data: 0.0001  max mem: 9310
+[14:54:35.043991] Epoch: [4]  [21/22]  eta: 0:00:00  lr: 0.024773  loss: 1.2808 (1.3005)  time: 0.3142  data: 0.0001  max mem: 9310
+[14:54:35.123335] Epoch: [4] Total time: 0:00:08 (0.3820 s / it)
+[14:54:35.123404] Averaged stats: lr: 0.024773  loss: 1.2808 (1.3005)
+[14:54:40.532946] Test:  [0/6]  eta: 0:00:07  loss: 1.8311 (1.8311)  acc1: 7.8125 (7.8125)  acc5: 100.0000 (100.0000)  time: 1.1730  data: 1.0713  max mem: 9310
+[14:54:41.006219] Test:  [5/6]  eta: 0:00:00  loss: 0.7777 (1.3289)  acc1: 12.5000 (50.8868)  acc5: 100.0000 (100.0000)  time: 0.2743  data: 0.1801  max mem: 9310
+[14:54:41.076281] Test: Total time: 0:00:01 (0.2869 s / it)
+[14:54:41.076339] * Acc@1 50.887 Acc@5 100.000 loss 1.329
+[14:54:41.076454] Accuracy of the network on the 733 test images: 50.9%
+[14:54:41.076465] Max accuracy: 54.16%
+[14:54:41.083472] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:54:42.417626] Epoch: [5]  [ 0/22]  eta: 0:00:29  lr: 0.025000  loss: 1.3008 (1.3008)  time: 1.3332  data: 1.0115  max mem: 9310
+[14:54:48.983692] Epoch: [5]  [20/22]  eta: 0:00:00  lr: 0.029545  loss: 1.2798 (1.2940)  time: 0.3283  data: 0.0138  max mem: 9310
+[14:54:49.297091] Epoch: [5]  [21/22]  eta: 0:00:00  lr: 0.029773  loss: 1.2798 (1.2909)  time: 0.3148  data: 0.0006  max mem: 9310
+[14:54:49.383512] Epoch: [5] Total time: 0:00:08 (0.3773 s / it)
+[14:54:49.383579] Averaged stats: lr: 0.029773  loss: 1.2798 (1.2909)
+[14:54:56.141825] Test:  [0/6]  eta: 0:00:07  loss: 1.8017 (1.8017)  acc1: 8.5938 (8.5938)  acc5: 100.0000 (100.0000)  time: 1.2084  data: 1.1119  max mem: 9310
+[14:54:56.610731] Test:  [5/6]  eta: 0:00:00  loss: 0.7806 (1.3273)  acc1: 20.3125 (52.7967)  acc5: 100.0000 (100.0000)  time: 0.2794  data: 0.1867  max mem: 9310
+[14:54:56.668930] Test: Total time: 0:00:01 (0.2901 s / it)
+[14:54:56.668986] * Acc@1 52.797 Acc@5 100.000 loss 1.327
+[14:54:56.669097] Accuracy of the network on the 733 test images: 52.8%
+[14:54:56.669107] Max accuracy: 54.16%
+[14:54:56.675347] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:54:58.167517] Epoch: [6]  [ 0/22]  eta: 0:00:32  lr: 0.030000  loss: 1.2871 (1.2871)  time: 1.4912  data: 1.1677  max mem: 9310
+[14:55:04.620611] Epoch: [6]  [20/22]  eta: 0:00:00  lr: 0.034545  loss: 1.2656 (1.2873)  time: 0.3226  data: 0.0085  max mem: 9310
+[14:55:04.936507] Epoch: [6]  [21/22]  eta: 0:00:00  lr: 0.034773  loss: 1.2656 (1.2851)  time: 0.3194  data: 0.0052  max mem: 9310
+[14:55:05.028312] Epoch: [6] Total time: 0:00:08 (0.3797 s / it)
+[14:55:05.028383] Averaged stats: lr: 0.034773  loss: 1.2656 (1.2851)
+[14:55:10.357705] Test:  [0/6]  eta: 0:00:07  loss: 1.7762 (1.7762)  acc1: 9.3750 (9.3750)  acc5: 100.0000 (100.0000)  time: 1.1887  data: 1.0918  max mem: 9310
+[14:55:10.874033] Test:  [5/6]  eta: 0:00:00  loss: 0.7719 (1.3219)  acc1: 19.5312 (52.6603)  acc5: 100.0000 (100.0000)  time: 0.2841  data: 0.1912  max mem: 9310
+[14:55:10.934201] Test: Total time: 0:00:01 (0.2951 s / it)
+[14:55:10.934264] * Acc@1 52.660 Acc@5 100.000 loss 1.322
+[14:55:10.934372] Accuracy of the network on the 733 test images: 52.7%
+[14:55:10.934381] Max accuracy: 54.16%
+[14:55:10.948553] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:55:12.437146] Epoch: [7]  [ 0/22]  eta: 0:00:32  lr: 0.035000  loss: 1.3148 (1.3148)  time: 1.4878  data: 1.1593  max mem: 9310
+[14:55:18.805921] Epoch: [7]  [20/22]  eta: 0:00:00  lr: 0.039545  loss: 1.2683 (1.2833)  time: 0.3184  data: 0.0031  max mem: 9310
+[14:55:19.120736] Epoch: [7]  [21/22]  eta: 0:00:00  lr: 0.039773  loss: 1.2683 (1.2805)  time: 0.3152  data: 0.0002  max mem: 9310
+[14:55:19.218314] Epoch: [7] Total time: 0:00:08 (0.3759 s / it)
+[14:55:19.218384] Averaged stats: lr: 0.039773  loss: 1.2683 (1.2805)
+[14:55:26.076806] Test:  [0/6]  eta: 0:00:06  loss: 1.7557 (1.7557)  acc1: 9.3750 (9.3750)  acc5: 100.0000 (100.0000)  time: 1.1250  data: 1.0235  max mem: 9310
+[14:55:26.545103] Test:  [5/6]  eta: 0:00:00  loss: 0.7619 (1.3166)  acc1: 17.1875 (52.3874)  acc5: 100.0000 (100.0000)  time: 0.2655  data: 0.1717  max mem: 9310
+[14:55:26.594765] Test: Total time: 0:00:01 (0.2746 s / it)
+[14:55:26.594821] * Acc@1 52.387 Acc@5 100.000 loss 1.317
+[14:55:26.594932] Accuracy of the network on the 733 test images: 52.4%
+[14:55:26.594942] Max accuracy: 54.16%
+[14:55:26.604975] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:55:28.138442] Epoch: [8]  [ 0/22]  eta: 0:00:33  lr: 0.040000  loss: 1.2832 (1.2832)  time: 1.5327  data: 1.2106  max mem: 9310
+[14:55:34.435755] Epoch: [8]  [20/22]  eta: 0:00:00  lr: 0.044545  loss: 1.2681 (1.2755)  time: 0.3148  data: 0.0001  max mem: 9310
+[14:55:34.750642] Epoch: [8]  [21/22]  eta: 0:00:00  lr: 0.044773  loss: 1.2681 (1.2716)  time: 0.3146  data: 0.0001  max mem: 9310
+[14:55:34.848095] Epoch: [8] Total time: 0:00:08 (0.3747 s / it)
+[14:55:34.848161] Averaged stats: lr: 0.044773  loss: 1.2681 (1.2716)
+[14:55:40.162680] Test:  [0/6]  eta: 0:00:06  loss: 1.7413 (1.7413)  acc1: 9.3750 (9.3750)  acc5: 100.0000 (100.0000)  time: 1.1040  data: 1.0076  max mem: 9310
+[14:55:40.631040] Test:  [5/6]  eta: 0:00:00  loss: 0.7592 (1.3110)  acc1: 19.5312 (52.9332)  acc5: 100.0000 (100.0000)  time: 0.2620  data: 0.1692  max mem: 9310
+[14:55:40.681479] Test: Total time: 0:00:01 (0.2713 s / it)
+[14:55:40.681532] * Acc@1 52.933 Acc@5 100.000 loss 1.311
+[14:55:40.681638] Accuracy of the network on the 733 test images: 52.9%
+[14:55:40.681647] Max accuracy: 54.16%
+[14:55:40.688546] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:55:42.381707] Epoch: [9]  [ 0/22]  eta: 0:00:37  lr: 0.045000  loss: 1.2900 (1.2900)  time: 1.6924  data: 1.3757  max mem: 9310
+[14:55:48.683938] Epoch: [9]  [20/22]  eta: 0:00:00  lr: 0.049545  loss: 1.2540 (1.2727)  time: 0.3151  data: 0.0001  max mem: 9310
+[14:55:48.998715] Epoch: [9]  [21/22]  eta: 0:00:00  lr: 0.049773  loss: 1.2540 (1.2699)  time: 0.3148  data: 0.0001  max mem: 9310
+[14:55:49.086310] Epoch: [9] Total time: 0:00:08 (0.3817 s / it)
+[14:55:49.086381] Averaged stats: lr: 0.049773  loss: 1.2540 (1.2699)
+[14:55:54.405412] Test:  [0/6]  eta: 0:00:06  loss: 1.7306 (1.7306)  acc1: 9.3750 (9.3750)  acc5: 100.0000 (100.0000)  time: 1.1186  data: 1.0223  max mem: 9310
+[14:55:54.877172] Test:  [5/6]  eta: 0:00:00  loss: 0.7491 (1.3044)  acc1: 14.8438 (52.1146)  acc5: 100.0000 (100.0000)  time: 0.2649  data: 0.1716  max mem: 9310
+[14:55:54.928859] Test: Total time: 0:00:01 (0.2744 s / it)
+[14:55:54.928910] * Acc@1 52.115 Acc@5 100.000 loss 1.304
+[14:55:54.929018] Accuracy of the network on the 733 test images: 52.1%
+[14:55:54.929028] Max accuracy: 54.16%
+[14:55:54.935707] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:55:56.658449] Epoch: [10]  [ 0/22]  eta: 0:00:37  lr: 0.050000  loss: 1.2926 (1.2926)  time: 1.7220  data: 1.4026  max mem: 9310
+[14:56:02.961745] Epoch: [10]  [20/22]  eta: 0:00:00  lr: 0.049984  loss: 1.2484 (1.2676)  time: 0.3151  data: 0.0004  max mem: 9310
+[14:56:03.276808] Epoch: [10]  [21/22]  eta: 0:00:00  lr: 0.049982  loss: 1.2484 (1.2642)  time: 0.3148  data: 0.0004  max mem: 9310
+[14:56:03.374793] Epoch: [10] Total time: 0:00:08 (0.3836 s / it)
+[14:56:03.374861] Averaged stats: lr: 0.049982  loss: 1.2484 (1.2642)
+[14:56:08.972910] Test:  [0/6]  eta: 0:00:07  loss: 1.7196 (1.7196)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.2071  data: 1.1108  max mem: 9310
+[14:56:09.434263] Test:  [5/6]  eta: 0:00:00  loss: 0.7452 (1.2987)  acc1: 16.4062 (52.6603)  acc5: 100.0000 (100.0000)  time: 0.2780  data: 0.1852  max mem: 9310
+[14:56:09.487913] Test: Total time: 0:00:01 (0.2878 s / it)
+[14:56:09.487966] * Acc@1 52.660 Acc@5 100.000 loss 1.299
+[14:56:09.488082] Accuracy of the network on the 733 test images: 52.7%
+[14:56:09.488091] Max accuracy: 54.16%
+[14:56:09.494866] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:56:10.827020] Epoch: [11]  [ 0/22]  eta: 0:00:29  lr: 0.049981  loss: 1.2620 (1.2620)  time: 1.3313  data: 1.0050  max mem: 9310
+[14:56:17.295073] Epoch: [11]  [20/22]  eta: 0:00:00  lr: 0.049930  loss: 1.2386 (1.2602)  time: 0.3234  data: 0.0076  max mem: 9310
+[14:56:17.610003] Epoch: [11]  [21/22]  eta: 0:00:00  lr: 0.049926  loss: 1.2386 (1.2562)  time: 0.3232  data: 0.0076  max mem: 9310
+[14:56:17.705056] Epoch: [11] Total time: 0:00:08 (0.3732 s / it)
+[14:56:17.705120] Averaged stats: lr: 0.049926  loss: 1.2386 (1.2562)
+[14:56:22.832408] Test:  [0/6]  eta: 0:00:06  loss: 1.7066 (1.7066)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.1043  data: 1.0028  max mem: 9310
+[14:56:23.309422] Test:  [5/6]  eta: 0:00:00  loss: 0.7425 (1.2928)  acc1: 16.4062 (52.5239)  acc5: 100.0000 (100.0000)  time: 0.2635  data: 0.1683  max mem: 9310
+[14:56:23.358828] Test: Total time: 0:00:01 (0.2726 s / it)
+[14:56:23.358875] * Acc@1 52.524 Acc@5 100.000 loss 1.293
+[14:56:23.358976] Accuracy of the network on the 733 test images: 52.5%
+[14:56:23.358985] Max accuracy: 54.16%
+[14:56:23.366483] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:56:24.783310] Epoch: [12]  [ 0/22]  eta: 0:00:31  lr: 0.049923  loss: 1.2800 (1.2800)  time: 1.4159  data: 1.0904  max mem: 9310
+[14:56:31.177091] Epoch: [12]  [20/22]  eta: 0:00:00  lr: 0.049837  loss: 1.2311 (1.2555)  time: 0.3197  data: 0.0037  max mem: 9310
+[14:56:31.491983] Epoch: [12]  [21/22]  eta: 0:00:00  lr: 0.049832  loss: 1.2311 (1.2530)  time: 0.3194  data: 0.0037  max mem: 9310
+[14:56:31.577234] Epoch: [12] Total time: 0:00:08 (0.3732 s / it)
+[14:56:31.577304] Averaged stats: lr: 0.049832  loss: 1.2311 (1.2530)
+[14:56:36.565841] Test:  [0/6]  eta: 0:00:06  loss: 1.7022 (1.7022)  acc1: 10.9375 (10.9375)  acc5: 100.0000 (100.0000)  time: 1.0785  data: 0.9822  max mem: 9310
+[14:56:37.078083] Test:  [5/6]  eta: 0:00:00  loss: 0.7334 (1.2872)  acc1: 16.4062 (52.3874)  acc5: 100.0000 (100.0000)  time: 0.2650  data: 0.1723  max mem: 9310
+[14:56:37.125101] Test: Total time: 0:00:01 (0.2737 s / it)
+[14:56:37.125153] * Acc@1 52.387 Acc@5 100.000 loss 1.287
+[14:56:37.125267] Accuracy of the network on the 733 test images: 52.4%
+[14:56:37.125276] Max accuracy: 54.16%
+[14:56:37.131292] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:56:38.678656] Epoch: [13]  [ 0/22]  eta: 0:00:34  lr: 0.049827  loss: 1.2948 (1.2948)  time: 1.5465  data: 1.2235  max mem: 9310
+[14:56:45.048923] Epoch: [13]  [20/22]  eta: 0:00:00  lr: 0.049706  loss: 1.2316 (1.2509)  time: 0.3185  data: 0.0030  max mem: 9310
+[14:56:45.365864] Epoch: [13]  [21/22]  eta: 0:00:00  lr: 0.049699  loss: 1.2316 (1.2472)  time: 0.3157  data: 0.0004  max mem: 9310
+[14:56:45.461752] Epoch: [13] Total time: 0:00:08 (0.3787 s / it)
+[14:56:45.461821] Averaged stats: lr: 0.049699  loss: 1.2316 (1.2472)
+[14:56:51.034178] Test:  [0/6]  eta: 0:00:06  loss: 1.6989 (1.6989)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.0798  data: 0.9827  max mem: 9310
+[14:56:51.503685] Test:  [5/6]  eta: 0:00:00  loss: 0.7279 (1.2828)  acc1: 17.1875 (52.6603)  acc5: 100.0000 (100.0000)  time: 0.2581  data: 0.1651  max mem: 9310
+[14:56:51.555470] Test: Total time: 0:00:01 (0.2677 s / it)
+[14:56:51.555524] * Acc@1 52.660 Acc@5 100.000 loss 1.283
+[14:56:51.555633] Accuracy of the network on the 733 test images: 52.7%
+[14:56:51.555643] Max accuracy: 54.16%
+[14:56:51.562662] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:56:52.884241] Epoch: [14]  [ 0/22]  eta: 0:00:29  lr: 0.049692  loss: 1.2559 (1.2559)  time: 1.3208  data: 0.9976  max mem: 9310
+[14:56:59.258416] Epoch: [14]  [20/22]  eta: 0:00:00  lr: 0.049537  loss: 1.2222 (1.2445)  time: 0.3187  data: 0.0031  max mem: 9310
+[14:56:59.573693] Epoch: [14]  [21/22]  eta: 0:00:00  lr: 0.049528  loss: 1.2222 (1.2413)  time: 0.3159  data: 0.0006  max mem: 9310
+[14:56:59.665682] Epoch: [14] Total time: 0:00:08 (0.3683 s / it)
+[14:56:59.665750] Averaged stats: lr: 0.049528  loss: 1.2222 (1.2413)
+[14:57:04.742084] Test:  [0/6]  eta: 0:00:06  loss: 1.6888 (1.6888)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.1307  data: 1.0343  max mem: 9310
+[14:57:05.214561] Test:  [5/6]  eta: 0:00:00  loss: 0.7262 (1.2784)  acc1: 17.9688 (52.6603)  acc5: 100.0000 (100.0000)  time: 0.2671  data: 0.1736  max mem: 9310
+[14:57:05.266687] Test: Total time: 0:00:01 (0.2766 s / it)
+[14:57:05.266745] * Acc@1 52.660 Acc@5 100.000 loss 1.278
+[14:57:05.266850] Accuracy of the network on the 733 test images: 52.7%
+[14:57:05.266860] Max accuracy: 54.16%
+[14:57:05.272640] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:57:06.842552] Epoch: [15]  [ 0/22]  eta: 0:00:34  lr: 0.049520  loss: 1.2451 (1.2451)  time: 1.5692  data: 1.2411  max mem: 9310
+[14:57:13.150131] Epoch: [15]  [20/22]  eta: 0:00:00  lr: 0.049330  loss: 1.2328 (1.2425)  time: 0.3153  data: 0.0002  max mem: 9310
+[14:57:13.464787] Epoch: [15]  [21/22]  eta: 0:00:00  lr: 0.049320  loss: 1.2328 (1.2398)  time: 0.3151  data: 0.0002  max mem: 9310
+[14:57:13.558700] Epoch: [15] Total time: 0:00:08 (0.3766 s / it)
+[14:57:13.558778] Averaged stats: lr: 0.049320  loss: 1.2328 (1.2398)
+[14:57:18.852347] Test:  [0/6]  eta: 0:00:07  loss: 1.6857 (1.6857)  acc1: 10.9375 (10.9375)  acc5: 100.0000 (100.0000)  time: 1.2487  data: 1.1469  max mem: 9310
+[14:57:19.316911] Test:  [5/6]  eta: 0:00:00  loss: 0.7173 (1.2743)  acc1: 17.9688 (52.7967)  acc5: 100.0000 (100.0000)  time: 0.2854  data: 0.1912  max mem: 9310
+[14:57:19.367998] Test: Total time: 0:00:01 (0.2949 s / it)
+[14:57:19.368054] * Acc@1 52.797 Acc@5 100.000 loss 1.274
+[14:57:19.368161] Accuracy of the network on the 733 test images: 52.8%
+[14:57:19.368170] Max accuracy: 54.16%
+[14:57:19.376152] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:57:20.714899] Epoch: [16]  [ 0/22]  eta: 0:00:29  lr: 0.049309  loss: 1.2462 (1.2462)  time: 1.3369  data: 1.0192  max mem: 9310
+[14:57:27.220063] Epoch: [16]  [20/22]  eta: 0:00:00  lr: 0.049085  loss: 1.2176 (1.2380)  time: 0.3252  data: 0.0102  max mem: 9310
+[14:57:27.536498] Epoch: [16]  [21/22]  eta: 0:00:00  lr: 0.049073  loss: 1.2176 (1.2348)  time: 0.3157  data: 0.0005  max mem: 9310
+[14:57:27.630109] Epoch: [16] Total time: 0:00:08 (0.3752 s / it)
+[14:57:27.630175] Averaged stats: lr: 0.049073  loss: 1.2176 (1.2348)
+[14:57:32.616497] Test:  [0/6]  eta: 0:00:06  loss: 1.6797 (1.6797)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.1270  data: 1.0305  max mem: 9310
+[14:57:33.087492] Test:  [5/6]  eta: 0:00:00  loss: 0.7162 (1.2707)  acc1: 17.9688 (52.9332)  acc5: 100.0000 (100.0000)  time: 0.2662  data: 0.1732  max mem: 9310
+[14:57:33.137132] Test: Total time: 0:00:01 (0.2755 s / it)
+[14:57:33.137183] * Acc@1 52.933 Acc@5 100.000 loss 1.271
+[14:57:33.137292] Accuracy of the network on the 733 test images: 52.9%
+[14:57:33.137301] Max accuracy: 54.16%
+[14:57:33.143593] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:57:34.755151] Epoch: [17]  [ 0/22]  eta: 0:00:35  lr: 0.049061  loss: 1.2261 (1.2261)  time: 1.6108  data: 1.2880  max mem: 9310
+[14:57:41.051746] Epoch: [17]  [20/22]  eta: 0:00:00  lr: 0.048804  loss: 1.2198 (1.2352)  time: 0.3148  data: 0.0002  max mem: 9310
+[14:57:41.367139] Epoch: [17]  [21/22]  eta: 0:00:00  lr: 0.048790  loss: 1.2198 (1.2330)  time: 0.3146  data: 0.0002  max mem: 9310
+[14:57:41.462275] Epoch: [17] Total time: 0:00:08 (0.3781 s / it)
+[14:57:41.462339] Averaged stats: lr: 0.048790  loss: 1.2198 (1.2330)
+[14:57:46.588487] Test:  [0/6]  eta: 0:00:06  loss: 1.6798 (1.6798)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.1640  data: 1.0676  max mem: 9310
+[14:57:47.059115] Test:  [5/6]  eta: 0:00:00  loss: 0.7125 (1.2677)  acc1: 17.9688 (53.0696)  acc5: 100.0000 (100.0000)  time: 0.2723  data: 0.1793  max mem: 9310
+[14:57:47.109968] Test: Total time: 0:00:01 (0.2817 s / it)
+[14:57:47.110020] * Acc@1 53.070 Acc@5 100.000 loss 1.268
+[14:57:47.110129] Accuracy of the network on the 733 test images: 53.1%
+[14:57:47.110139] Max accuracy: 54.16%
+[14:57:47.115803] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:57:48.751721] Epoch: [18]  [ 0/22]  eta: 0:00:35  lr: 0.048776  loss: 1.2696 (1.2696)  time: 1.6351  data: 1.3130  max mem: 9310
+[14:57:55.057156] Epoch: [18]  [20/22]  eta: 0:00:00  lr: 0.048486  loss: 1.2087 (1.2324)  time: 0.3152  data: 0.0001  max mem: 9310
+[14:57:55.372931] Epoch: [18]  [21/22]  eta: 0:00:00  lr: 0.048470  loss: 1.2087 (1.2297)  time: 0.3150  data: 0.0001  max mem: 9310
+[14:57:55.470554] Epoch: [18] Total time: 0:00:08 (0.3798 s / it)
+[14:57:55.470627] Averaged stats: lr: 0.048470  loss: 1.2087 (1.2297)
+[14:58:00.700865] Test:  [0/6]  eta: 0:00:06  loss: 1.6772 (1.6772)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.1605  data: 1.0639  max mem: 9310
+[14:58:01.170837] Test:  [5/6]  eta: 0:00:00  loss: 0.7084 (1.2656)  acc1: 17.9688 (53.0696)  acc5: 100.0000 (100.0000)  time: 0.2716  data: 0.1787  max mem: 9310
+[14:58:01.222751] Test: Total time: 0:00:01 (0.2812 s / it)
+[14:58:01.222808] * Acc@1 53.070 Acc@5 100.000 loss 1.266
+[14:58:01.222922] Accuracy of the network on the 733 test images: 53.1%
+[14:58:01.222932] Max accuracy: 54.16%
+[14:58:01.228809] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:58:02.666239] Epoch: [19]  [ 0/22]  eta: 0:00:31  lr: 0.048455  loss: 1.2424 (1.2424)  time: 1.4366  data: 1.1147  max mem: 9310
+[14:58:09.175363] Epoch: [19]  [20/22]  eta: 0:00:00  lr: 0.048131  loss: 1.2110 (1.2257)  time: 0.3254  data: 0.0100  max mem: 9310
+[14:58:09.491130] Epoch: [19]  [21/22]  eta: 0:00:00  lr: 0.048114  loss: 1.2110 (1.2221)  time: 0.3223  data: 0.0072  max mem: 9310
+[14:58:09.581814] Epoch: [19] Total time: 0:00:08 (0.3797 s / it)
+[14:58:09.581883] Averaged stats: lr: 0.048114  loss: 1.2110 (1.2221)
+[14:58:15.211174] Test:  [0/6]  eta: 0:00:07  loss: 1.6644 (1.6644)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.2462  data: 1.1447  max mem: 9310
+[14:58:15.678276] Test:  [5/6]  eta: 0:00:00  loss: 0.7126 (1.2619)  acc1: 20.3125 (52.6603)  acc5: 100.0000 (100.0000)  time: 0.2854  data: 0.1909  max mem: 9310
+[14:58:15.739949] Test: Total time: 0:00:01 (0.2960 s / it)
+[14:58:15.739999] * Acc@1 52.660 Acc@5 100.000 loss 1.262
+[14:58:15.740102] Accuracy of the network on the 733 test images: 52.7%
+[14:58:15.740112] Max accuracy: 54.16%
+[14:58:15.747480] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:58:17.029827] Epoch: [20]  [ 0/22]  eta: 0:00:28  lr: 0.048097  loss: 1.2424 (1.2424)  time: 1.2796  data: 0.9568  max mem: 9310
+[14:58:23.355052] Epoch: [20]  [20/22]  eta: 0:00:00  lr: 0.047741  loss: 1.2095 (1.2273)  time: 0.3162  data: 0.0013  max mem: 9310
+[14:58:23.668988] Epoch: [20]  [21/22]  eta: 0:00:00  lr: 0.047722  loss: 1.2095 (1.2244)  time: 0.3160  data: 0.0013  max mem: 9310
+[14:58:23.763811] Epoch: [20] Total time: 0:00:08 (0.3644 s / it)
+[14:58:23.763880] Averaged stats: lr: 0.047722  loss: 1.2095 (1.2244)
+[14:58:29.195794] Test:  [0/6]  eta: 0:00:07  loss: 1.6665 (1.6665)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.2501  data: 1.1538  max mem: 9310
+[14:58:29.657544] Test:  [5/6]  eta: 0:00:00  loss: 0.7067 (1.2598)  acc1: 19.5312 (53.0696)  acc5: 100.0000 (100.0000)  time: 0.2852  data: 0.1924  max mem: 9310
+[14:58:29.722866] Test: Total time: 0:00:01 (0.2970 s / it)
+[14:58:29.722921] * Acc@1 53.070 Acc@5 100.000 loss 1.260
+[14:58:29.723028] Accuracy of the network on the 733 test images: 53.1%
+[14:58:29.723038] Max accuracy: 54.16%
+[14:58:29.729385] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:58:31.237951] Epoch: [21]  [ 0/22]  eta: 0:00:33  lr: 0.047704  loss: 1.2431 (1.2431)  time: 1.5077  data: 1.1905  max mem: 9310
+[14:58:37.557495] Epoch: [21]  [20/22]  eta: 0:00:00  lr: 0.047316  loss: 1.2131 (1.2199)  time: 0.3159  data: 0.0005  max mem: 9310
+[14:58:37.874362] Epoch: [21]  [21/22]  eta: 0:00:00  lr: 0.047295  loss: 1.2131 (1.2185)  time: 0.3158  data: 0.0005  max mem: 9310
+[14:58:37.968649] Epoch: [21] Total time: 0:00:08 (0.3745 s / it)
+[14:58:37.968715] Averaged stats: lr: 0.047295  loss: 1.2131 (1.2185)
+[14:58:43.483291] Test:  [0/6]  eta: 0:00:07  loss: 1.6563 (1.6563)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.2532  data: 1.1565  max mem: 9310
+[14:58:43.944581] Test:  [5/6]  eta: 0:00:00  loss: 0.7086 (1.2570)  acc1: 21.0938 (52.9332)  acc5: 100.0000 (100.0000)  time: 0.2856  data: 0.1928  max mem: 9310
+[14:58:43.995321] Test: Total time: 0:00:01 (0.2944 s / it)
+[14:58:43.995369] * Acc@1 52.933 Acc@5 100.000 loss 1.257
+[14:58:43.995475] Accuracy of the network on the 733 test images: 52.9%
+[14:58:43.995485] Max accuracy: 54.16%
+[14:58:44.003089] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:58:45.356867] Epoch: [22]  [ 0/22]  eta: 0:00:29  lr: 0.047275  loss: 1.2513 (1.2513)  time: 1.3529  data: 1.0330  max mem: 9310
+[14:58:51.810064] Epoch: [22]  [20/22]  eta: 0:00:00  lr: 0.046856  loss: 1.2049 (1.2192)  time: 0.3226  data: 0.0073  max mem: 9310
+[14:58:52.125582] Epoch: [22]  [21/22]  eta: 0:00:00  lr: 0.046834  loss: 1.2049 (1.2166)  time: 0.3151  data: 0.0001  max mem: 9310
+[14:58:52.214817] Epoch: [22] Total time: 0:00:08 (0.3733 s / it)
+[14:58:52.214887] Averaged stats: lr: 0.046834  loss: 1.2049 (1.2166)
+[14:58:57.812453] Test:  [0/6]  eta: 0:00:06  loss: 1.6583 (1.6583)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.1468  data: 1.0501  max mem: 9310
+[14:58:58.283658] Test:  [5/6]  eta: 0:00:00  loss: 0.7028 (1.2545)  acc1: 21.8750 (53.0696)  acc5: 100.0000 (100.0000)  time: 0.2696  data: 0.1764  max mem: 9310
+[14:58:58.334426] Test: Total time: 0:00:01 (0.2789 s / it)
+[14:58:58.334476] * Acc@1 53.070 Acc@5 100.000 loss 1.255
+[14:58:58.334576] Accuracy of the network on the 733 test images: 53.1%
+[14:58:58.334585] Max accuracy: 54.16%
+[14:58:58.341069] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:58:59.736716] Epoch: [23]  [ 0/22]  eta: 0:00:30  lr: 0.046812  loss: 1.2452 (1.2452)  time: 1.3947  data: 1.0732  max mem: 9310
+[14:59:06.043974] Epoch: [23]  [20/22]  eta: 0:00:00  lr: 0.046363  loss: 1.2168 (1.2214)  time: 0.3153  data: 0.0002  max mem: 9310
+[14:59:06.359001] Epoch: [23]  [21/22]  eta: 0:00:00  lr: 0.046339  loss: 1.2168 (1.2181)  time: 0.3151  data: 0.0002  max mem: 9310
+[14:59:06.454793] Epoch: [23] Total time: 0:00:08 (0.3688 s / it)
+[14:59:06.454862] Averaged stats: lr: 0.046339  loss: 1.2168 (1.2181)
+[14:59:11.928683] Test:  [0/6]  eta: 0:00:06  loss: 1.6560 (1.6560)  acc1: 12.5000 (12.5000)  acc5: 100.0000 (100.0000)  time: 1.1037  data: 1.0022  max mem: 9310
+[14:59:12.405020] Test:  [5/6]  eta: 0:00:00  loss: 0.7005 (1.2532)  acc1: 21.8750 (53.3424)  acc5: 100.0000 (100.0000)  time: 0.2632  data: 0.1681  max mem: 9310
+[14:59:12.454394] Test: Total time: 0:00:01 (0.2723 s / it)
+[14:59:12.454457] * Acc@1 53.342 Acc@5 100.000 loss 1.253
+[14:59:12.454563] Accuracy of the network on the 733 test images: 53.3%
+[14:59:12.454572] Max accuracy: 54.16%
+[14:59:12.461794] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:59:13.882173] Epoch: [24]  [ 0/22]  eta: 0:00:31  lr: 0.046316  loss: 1.2268 (1.2268)  time: 1.4194  data: 1.0960  max mem: 9310
+[14:59:20.290228] Epoch: [24]  [20/22]  eta: 0:00:00  lr: 0.045836  loss: 1.2094 (1.2161)  time: 0.3204  data: 0.0055  max mem: 9310
+[14:59:20.605170] Epoch: [24]  [21/22]  eta: 0:00:00  lr: 0.045811  loss: 1.2094 (1.2121)  time: 0.3151  data: 0.0005  max mem: 9310
+[14:59:20.695500] Epoch: [24] Total time: 0:00:08 (0.3743 s / it)
+[14:59:20.695568] Averaged stats: lr: 0.045811  loss: 1.2094 (1.2121)
+[14:59:26.064764] Test:  [0/6]  eta: 0:00:06  loss: 1.6594 (1.6594)  acc1: 12.5000 (12.5000)  acc5: 100.0000 (100.0000)  time: 1.1621  data: 1.0655  max mem: 9310
+[14:59:26.526712] Test:  [5/6]  eta: 0:00:00  loss: 0.6965 (1.2516)  acc1: 21.8750 (53.3424)  acc5: 100.0000 (100.0000)  time: 0.2706  data: 0.1776  max mem: 9310
+[14:59:26.579979] Test: Total time: 0:00:01 (0.2803 s / it)
+[14:59:26.580033] * Acc@1 53.342 Acc@5 100.000 loss 1.252
+[14:59:26.580136] Accuracy of the network on the 733 test images: 53.3%
+[14:59:26.580145] Max accuracy: 54.16%
+[14:59:26.588464] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:59:28.034271] Epoch: [25]  [ 0/22]  eta: 0:00:31  lr: 0.045787  loss: 1.2409 (1.2409)  time: 1.4450  data: 1.1216  max mem: 9310
+[14:59:34.354632] Epoch: [25]  [20/22]  eta: 0:00:00  lr: 0.045278  loss: 1.2069 (1.2185)  time: 0.3160  data: 0.0004  max mem: 9310
+[14:59:34.669410] Epoch: [25]  [21/22]  eta: 0:00:00  lr: 0.045252  loss: 1.2069 (1.2154)  time: 0.3157  data: 0.0004  max mem: 9310
+[14:59:34.759732] Epoch: [25] Total time: 0:00:08 (0.3714 s / it)
+[14:59:34.759799] Averaged stats: lr: 0.045252  loss: 1.2069 (1.2154)
+[14:59:39.824371] Test:  [0/6]  eta: 0:00:06  loss: 1.6516 (1.6516)  acc1: 13.2812 (13.2812)  acc5: 100.0000 (100.0000)  time: 1.1577  data: 1.0613  max mem: 9310
+[14:59:40.340267] Test:  [5/6]  eta: 0:00:00  loss: 0.7008 (1.2498)  acc1: 21.8750 (53.3424)  acc5: 100.0000 (100.0000)  time: 0.2788  data: 0.1858  max mem: 9310
+[14:59:40.387689] Test: Total time: 0:00:01 (0.2876 s / it)
+[14:59:40.387737] * Acc@1 53.342 Acc@5 100.000 loss 1.250
+[14:59:40.387844] Accuracy of the network on the 733 test images: 53.3%
+[14:59:40.387853] Max accuracy: 54.16%
+[14:59:40.394293] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:59:41.734836] Epoch: [26]  [ 0/22]  eta: 0:00:29  lr: 0.045225  loss: 1.2345 (1.2345)  time: 1.3370  data: 1.0117  max mem: 9310
+[14:59:48.245271] Epoch: [26]  [20/22]  eta: 0:00:00  lr: 0.044688  loss: 1.1951 (1.2134)  time: 0.3255  data: 0.0096  max mem: 9310
+[14:59:48.562506] Epoch: [26]  [21/22]  eta: 0:00:00  lr: 0.044661  loss: 1.1951 (1.2112)  time: 0.3254  data: 0.0094  max mem: 9310
+[14:59:48.665237] Epoch: [26] Total time: 0:00:08 (0.3759 s / it)
+[14:59:48.665306] Averaged stats: lr: 0.044661  loss: 1.1951 (1.2112)
+[14:59:53.851670] Test:  [0/6]  eta: 0:00:06  loss: 1.6495 (1.6495)  acc1: 13.2812 (13.2812)  acc5: 100.0000 (100.0000)  time: 1.1150  data: 1.0182  max mem: 9310
+[14:59:54.321834] Test:  [5/6]  eta: 0:00:00  loss: 0.6973 (1.2482)  acc1: 21.8750 (53.2060)  acc5: 100.0000 (100.0000)  time: 0.2641  data: 0.1710  max mem: 9310
+[14:59:54.382915] Test: Total time: 0:00:01 (0.2752 s / it)
+[14:59:54.382970] * Acc@1 53.206 Acc@5 100.000 loss 1.248
+[14:59:54.383079] Accuracy of the network on the 733 test images: 53.2%
+[14:59:54.383090] Max accuracy: 54.16%
+[14:59:54.389205] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[14:59:55.953848] Epoch: [27]  [ 0/22]  eta: 0:00:34  lr: 0.044633  loss: 1.2513 (1.2513)  time: 1.5638  data: 1.2421  max mem: 9310
+[15:00:02.265623] Epoch: [27]  [20/22]  eta: 0:00:00  lr: 0.044068  loss: 1.1978 (1.2100)  time: 0.3155  data: 0.0003  max mem: 9310
+[15:00:02.580182] Epoch: [27]  [21/22]  eta: 0:00:00  lr: 0.044039  loss: 1.1978 (1.2084)  time: 0.3150  data: 0.0001  max mem: 9310
+[15:00:02.671848] Epoch: [27] Total time: 0:00:08 (0.3765 s / it)
+[15:00:02.671914] Averaged stats: lr: 0.044039  loss: 1.1978 (1.2084)
+[15:00:12.777273] Test:  [0/6]  eta: 0:00:07  loss: 1.6480 (1.6480)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.2360  data: 1.1344  max mem: 9310
+[15:00:13.249048] Test:  [5/6]  eta: 0:00:00  loss: 0.6957 (1.2464)  acc1: 21.8750 (53.3424)  acc5: 100.0000 (100.0000)  time: 0.2845  data: 0.1903  max mem: 9310
+[15:00:13.300503] Test: Total time: 0:00:01 (0.2940 s / it)
+[15:00:13.300558] * Acc@1 53.342 Acc@5 100.000 loss 1.246
+[15:00:13.300665] Accuracy of the network on the 733 test images: 53.3%
+[15:00:13.300676] Max accuracy: 54.16%
+[15:00:13.312887] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:00:15.277909] Epoch: [28]  [ 0/22]  eta: 0:00:43  lr: 0.044010  loss: 1.2002 (1.2002)  time: 1.9634  data: 1.6414  max mem: 9310
+[15:00:21.707331] Epoch: [28]  [20/22]  eta: 0:00:00  lr: 0.043419  loss: 1.2049 (1.2099)  time: 0.3214  data: 0.0054  max mem: 9310
+[15:00:22.021714] Epoch: [28]  [21/22]  eta: 0:00:00  lr: 0.043388  loss: 1.2049 (1.2073)  time: 0.3161  data: 0.0003  max mem: 9310
+[15:00:22.109360] Epoch: [28] Total time: 0:00:08 (0.3998 s / it)
+[15:00:22.109422] Averaged stats: lr: 0.043388  loss: 1.2049 (1.2073)
+[15:00:28.498284] Test:  [0/6]  eta: 0:00:07  loss: 1.6485 (1.6485)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.2169  data: 1.1206  max mem: 9310
+[15:00:28.967636] Test:  [5/6]  eta: 0:00:00  loss: 0.6943 (1.2455)  acc1: 22.6562 (53.3424)  acc5: 100.0000 (100.0000)  time: 0.2809  data: 0.1881  max mem: 9310
+[15:00:29.021367] Test: Total time: 0:00:01 (0.2908 s / it)
+[15:00:29.021434] * Acc@1 53.342 Acc@5 100.000 loss 1.246
+[15:00:29.021539] Accuracy of the network on the 733 test images: 53.3%
+[15:00:29.021549] Max accuracy: 54.16%
+[15:00:29.028485] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:00:30.664187] Epoch: [29]  [ 0/22]  eta: 0:00:35  lr: 0.043358  loss: 1.1982 (1.1982)  time: 1.6348  data: 1.3094  max mem: 9310
+[15:00:36.996367] Epoch: [29]  [20/22]  eta: 0:00:00  lr: 0.042741  loss: 1.2020 (1.2141)  time: 0.3166  data: 0.0001  max mem: 9310
+[15:00:37.310521] Epoch: [29]  [21/22]  eta: 0:00:00  lr: 0.042709  loss: 1.2020 (1.2111)  time: 0.3162  data: 0.0001  max mem: 9310
+[15:00:37.383627] Epoch: [29] Total time: 0:00:08 (0.3798 s / it)
+[15:00:37.383686] Averaged stats: lr: 0.042709  loss: 1.2020 (1.2111)
+[15:00:45.883442] Test:  [0/6]  eta: 0:00:07  loss: 1.6480 (1.6480)  acc1: 11.7188 (11.7188)  acc5: 100.0000 (100.0000)  time: 1.2640  data: 1.1674  max mem: 9310
+[15:00:46.354627] Test:  [5/6]  eta: 0:00:00  loss: 0.6925 (1.2441)  acc1: 21.8750 (53.3424)  acc5: 100.0000 (100.0000)  time: 0.2891  data: 0.1958  max mem: 9310
+[15:00:46.408192] Test: Total time: 0:00:01 (0.2989 s / it)
+[15:00:46.408251] * Acc@1 53.342 Acc@5 100.000 loss 1.244
+[15:00:46.408361] Accuracy of the network on the 733 test images: 53.3%
+[15:00:46.408372] Max accuracy: 54.16%
+[15:00:46.416976] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:00:47.817967] Epoch: [30]  [ 0/22]  eta: 0:00:30  lr: 0.042678  loss: 1.2062 (1.2062)  time: 1.4000  data: 1.0724  max mem: 9310
+[15:00:54.314475] Epoch: [30]  [20/22]  eta: 0:00:00  lr: 0.042035  loss: 1.2151 (1.2169)  time: 0.3248  data: 0.0090  max mem: 9310
+[15:00:54.630524] Epoch: [30]  [21/22]  eta: 0:00:00  lr: 0.042003  loss: 1.2151 (1.2136)  time: 0.3171  data: 0.0014  max mem: 9310
+[15:00:54.722014] Epoch: [30] Total time: 0:00:08 (0.3775 s / it)
+[15:00:54.722083] Averaged stats: lr: 0.042003  loss: 1.2151 (1.2136)
+[15:01:02.096918] Test:  [0/6]  eta: 0:00:06  loss: 1.6426 (1.6426)  acc1: 12.5000 (12.5000)  acc5: 100.0000 (100.0000)  time: 1.1591  data: 1.0578  max mem: 9310
+[15:01:02.571449] Test:  [5/6]  eta: 0:00:00  loss: 0.6936 (1.2426)  acc1: 22.6562 (53.4789)  acc5: 100.0000 (100.0000)  time: 0.2722  data: 0.1775  max mem: 9310
+[15:01:02.620425] Test: Total time: 0:00:01 (0.2813 s / it)
+[15:01:02.620477] * Acc@1 53.479 Acc@5 100.000 loss 1.243
+[15:01:02.620581] Accuracy of the network on the 733 test images: 53.5%
+[15:01:02.620591] Max accuracy: 54.16%
+[15:01:02.636865] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:01:04.323648] Epoch: [31]  [ 0/22]  eta: 0:00:37  lr: 0.041970  loss: 1.2234 (1.2234)  time: 1.6858  data: 1.3681  max mem: 9310
+[15:01:10.621194] Epoch: [31]  [20/22]  eta: 0:00:00  lr: 0.041304  loss: 1.1942 (1.2047)  time: 0.3148  data: 0.0001  max mem: 9310
+[15:01:10.935454] Epoch: [31]  [21/22]  eta: 0:00:00  lr: 0.041270  loss: 1.1942 (1.2022)  time: 0.3146  data: 0.0001  max mem: 9310
+[15:01:11.033041] Epoch: [31] Total time: 0:00:08 (0.3816 s / it)
+[15:01:11.033106] Averaged stats: lr: 0.041270  loss: 1.1942 (1.2022)
+[15:01:20.696750] Test:  [0/6]  eta: 0:00:06  loss: 1.6409 (1.6409)  acc1: 14.0625 (14.0625)  acc5: 100.0000 (100.0000)  time: 1.1595  data: 1.0627  max mem: 9310
+[15:01:21.167803] Test:  [5/6]  eta: 0:00:00  loss: 0.6924 (1.2414)  acc1: 23.4375 (53.6153)  acc5: 100.0000 (100.0000)  time: 0.2716  data: 0.1786  max mem: 9310
+[15:01:21.218737] Test: Total time: 0:00:01 (0.2812 s / it)
+[15:01:21.218789] * Acc@1 53.615 Acc@5 100.000 loss 1.241
+[15:01:21.218894] Accuracy of the network on the 733 test images: 53.6%
+[15:01:21.218905] Max accuracy: 54.16%
+[15:01:21.231540] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:01:22.873151] Epoch: [32]  [ 0/22]  eta: 0:00:36  lr: 0.041236  loss: 1.2401 (1.2401)  time: 1.6407  data: 1.3155  max mem: 9310
+[15:01:29.199112] Epoch: [32]  [20/22]  eta: 0:00:00  lr: 0.040547  loss: 1.1766 (1.2034)  time: 0.3163  data: 0.0006  max mem: 9310
+[15:01:29.514478] Epoch: [32]  [21/22]  eta: 0:00:00  lr: 0.040512  loss: 1.1766 (1.2012)  time: 0.3159  data: 0.0005  max mem: 9310
+[15:01:29.603982] Epoch: [32] Total time: 0:00:08 (0.3806 s / it)
+[15:01:29.604053] Averaged stats: lr: 0.040512  loss: 1.1766 (1.2012)
+[15:01:36.157258] Test:  [0/6]  eta: 0:00:06  loss: 1.6376 (1.6376)  acc1: 13.2812 (13.2812)  acc5: 100.0000 (100.0000)  time: 1.1536  data: 1.0571  max mem: 9310
+[15:01:36.618311] Test:  [5/6]  eta: 0:00:00  loss: 0.6923 (1.2395)  acc1: 24.2188 (53.8881)  acc5: 100.0000 (100.0000)  time: 0.2690  data: 0.1763  max mem: 9310
+[15:01:36.670291] Test: Total time: 0:00:01 (0.2786 s / it)
+[15:01:36.670345] * Acc@1 53.888 Acc@5 100.000 loss 1.240
+[15:01:36.670459] Accuracy of the network on the 733 test images: 53.9%
+[15:01:36.670469] Max accuracy: 54.16%
+[15:01:36.679121] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:01:38.049193] Epoch: [33]  [ 0/22]  eta: 0:00:30  lr: 0.040477  loss: 1.2134 (1.2134)  time: 1.3652  data: 1.0405  max mem: 9310
+[15:01:44.612106] Epoch: [33]  [20/22]  eta: 0:00:00  lr: 0.039767  loss: 1.2062 (1.2088)  time: 0.3281  data: 0.0126  max mem: 9310
+[15:01:44.926847] Epoch: [33]  [21/22]  eta: 0:00:00  lr: 0.039731  loss: 1.2062 (1.2070)  time: 0.3277  data: 0.0124  max mem: 9310
+[15:01:45.013166] Epoch: [33] Total time: 0:00:08 (0.3788 s / it)
+[15:01:45.013242] Averaged stats: lr: 0.039731  loss: 1.2062 (1.2070)
+[15:01:51.325671] Test:  [0/6]  eta: 0:00:07  loss: 1.6470 (1.6470)  acc1: 13.2812 (13.2812)  acc5: 100.0000 (100.0000)  time: 1.2567  data: 1.1550  max mem: 9310
+[15:01:51.799429] Test:  [5/6]  eta: 0:00:00  loss: 0.6828 (1.2393)  acc1: 22.6562 (53.7517)  acc5: 100.0000 (100.0000)  time: 0.2883  data: 0.1940  max mem: 9310
+[15:01:51.858882] Test: Total time: 0:00:01 (0.2992 s / it)
+[15:01:51.858940] * Acc@1 53.752 Acc@5 100.000 loss 1.239
+[15:01:51.859051] Accuracy of the network on the 733 test images: 53.8%
+[15:01:51.859061] Max accuracy: 54.16%
+[15:01:51.868776] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:01:53.486726] Epoch: [34]  [ 0/22]  eta: 0:00:35  lr: 0.039695  loss: 1.2519 (1.2519)  time: 1.6170  data: 1.2945  max mem: 9310
+[15:01:59.971561] Epoch: [34]  [20/22]  eta: 0:00:00  lr: 0.038963  loss: 1.2065 (1.2079)  time: 0.3242  data: 0.0081  max mem: 9310
+[15:02:00.285139] Epoch: [34]  [21/22]  eta: 0:00:00  lr: 0.038926  loss: 1.2065 (1.2058)  time: 0.3211  data: 0.0054  max mem: 9310
+[15:02:00.357173] Epoch: [34] Total time: 0:00:08 (0.3858 s / it)
+[15:02:00.357238] Averaged stats: lr: 0.038926  loss: 1.2065 (1.2058)
+[15:02:11.370259] Test:  [0/6]  eta: 0:00:07  loss: 1.6448 (1.6448)  acc1: 13.2812 (13.2812)  acc5: 100.0000 (100.0000)  time: 1.2132  data: 1.1167  max mem: 9310
+[15:02:11.844613] Test:  [5/6]  eta: 0:00:00  loss: 0.6861 (1.2381)  acc1: 22.6562 (53.7517)  acc5: 100.0000 (100.0000)  time: 0.2811  data: 0.1874  max mem: 9310
+[15:02:11.907602] Test: Total time: 0:00:01 (0.2926 s / it)
+[15:02:11.907655] * Acc@1 53.752 Acc@5 100.000 loss 1.238
+[15:02:11.907763] Accuracy of the network on the 733 test images: 53.8%
+[15:02:11.907773] Max accuracy: 54.16%
+[15:02:11.919220] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:02:13.373076] Epoch: [35]  [ 0/22]  eta: 0:00:31  lr: 0.038889  loss: 1.2437 (1.2437)  time: 1.4531  data: 1.1304  max mem: 9310
+[15:02:19.746149] Epoch: [35]  [20/22]  eta: 0:00:00  lr: 0.038138  loss: 1.2020 (1.2066)  time: 0.3186  data: 0.0027  max mem: 9310
+[15:02:20.061257] Epoch: [35]  [21/22]  eta: 0:00:00  lr: 0.038100  loss: 1.2020 (1.2033)  time: 0.3155  data: 0.0001  max mem: 9310
+[15:02:20.155293] Epoch: [35] Total time: 0:00:08 (0.3744 s / it)
+[15:02:20.155362] Averaged stats: lr: 0.038100  loss: 1.2020 (1.2033)
+[15:02:27.435068] Test:  [0/6]  eta: 0:00:06  loss: 1.6400 (1.6400)  acc1: 13.2812 (13.2812)  acc5: 100.0000 (100.0000)  time: 1.0890  data: 0.9924  max mem: 9310
+[15:02:27.903440] Test:  [5/6]  eta: 0:00:00  loss: 0.6842 (1.2374)  acc1: 22.6562 (54.0246)  acc5: 100.0000 (100.0000)  time: 0.2595  data: 0.1666  max mem: 9310
+[15:02:27.951952] Test: Total time: 0:00:01 (0.2684 s / it)
+[15:02:27.952001] * Acc@1 54.025 Acc@5 100.000 loss 1.237
+[15:02:27.952106] Accuracy of the network on the 733 test images: 54.0%
+[15:02:27.952115] Max accuracy: 54.16%
+[15:02:27.960408] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:02:29.628822] Epoch: [36]  [ 0/22]  eta: 0:00:36  lr: 0.038062  loss: 1.1854 (1.1854)  time: 1.6642  data: 1.3422  max mem: 9310
+[15:02:35.955959] Epoch: [36]  [20/22]  eta: 0:00:00  lr: 0.037293  loss: 1.1892 (1.1986)  time: 0.3163  data: 0.0004  max mem: 9310
+[15:02:36.271284] Epoch: [36]  [21/22]  eta: 0:00:00  lr: 0.037254  loss: 1.1892 (1.1973)  time: 0.3160  data: 0.0004  max mem: 9310
+[15:02:36.363444] Epoch: [36] Total time: 0:00:08 (0.3820 s / it)
+[15:02:36.363513] Averaged stats: lr: 0.037254  loss: 1.1892 (1.1973)
+[15:02:43.478346] Test:  [0/6]  eta: 0:00:06  loss: 1.6408 (1.6408)  acc1: 14.0625 (14.0625)  acc5: 100.0000 (100.0000)  time: 1.1431  data: 1.0415  max mem: 9310
+[15:02:43.952347] Test:  [5/6]  eta: 0:00:00  loss: 0.6843 (1.2361)  acc1: 24.2188 (54.2974)  acc5: 100.0000 (100.0000)  time: 0.2694  data: 0.1749  max mem: 9310
+[15:02:44.021937] Test: Total time: 0:00:01 (0.2820 s / it)
+[15:02:44.021988] * Acc@1 54.297 Acc@5 100.000 loss 1.236
+[15:02:44.022098] Accuracy of the network on the 733 test images: 54.3%
+[15:02:44.022108] Max accuracy: 54.30%
+[15:02:44.031418] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:02:45.499318] Epoch: [37]  [ 0/22]  eta: 0:00:32  lr: 0.037216  loss: 1.2177 (1.2177)  time: 1.4653  data: 1.1412  max mem: 9310
+[15:02:51.948320] Epoch: [37]  [20/22]  eta: 0:00:00  lr: 0.036429  loss: 1.1951 (1.1998)  time: 0.3224  data: 0.0061  max mem: 9310
+[15:02:52.263588] Epoch: [37]  [21/22]  eta: 0:00:00  lr: 0.036390  loss: 1.1951 (1.1972)  time: 0.3167  data: 0.0006  max mem: 9310
+[15:02:52.345811] Epoch: [37] Total time: 0:00:08 (0.3779 s / it)
+[15:02:52.345876] Averaged stats: lr: 0.036390  loss: 1.1951 (1.1972)
+[15:02:59.427398] Test:  [0/6]  eta: 0:00:07  loss: 1.6376 (1.6376)  acc1: 15.6250 (15.6250)  acc5: 100.0000 (100.0000)  time: 1.2982  data: 1.2018  max mem: 9310
+[15:02:59.892682] Test:  [5/6]  eta: 0:00:00  loss: 0.6846 (1.2355)  acc1: 24.2188 (54.5703)  acc5: 100.0000 (100.0000)  time: 0.2937  data: 0.2004  max mem: 9310
+[15:02:59.956026] Test: Total time: 0:00:01 (0.3052 s / it)
+[15:02:59.956085] * Acc@1 54.570 Acc@5 100.000 loss 1.236
+[15:02:59.956236] Accuracy of the network on the 733 test images: 54.6%
+[15:02:59.956247] Max accuracy: 54.57%
+[15:02:59.967004] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:03:01.539091] Epoch: [38]  [ 0/22]  eta: 0:00:34  lr: 0.036350  loss: 1.2120 (1.2120)  time: 1.5712  data: 1.2506  max mem: 9310
+[15:03:07.997410] Epoch: [38]  [20/22]  eta: 0:00:00  lr: 0.035547  loss: 1.1814 (1.2016)  time: 0.3229  data: 0.0053  max mem: 9310
+[15:03:08.314474] Epoch: [38]  [21/22]  eta: 0:00:00  lr: 0.035507  loss: 1.1814 (1.1999)  time: 0.3228  data: 0.0053  max mem: 9310
+[15:03:08.387786] Epoch: [38] Total time: 0:00:08 (0.3828 s / it)
+[15:03:08.387850] Averaged stats: lr: 0.035507  loss: 1.1814 (1.1999)
+[15:03:14.485243] Test:  [0/6]  eta: 0:00:08  loss: 1.6445 (1.6445)  acc1: 13.2812 (13.2812)  acc5: 100.0000 (100.0000)  time: 1.3516  data: 1.2545  max mem: 9310
+[15:03:14.948232] Test:  [5/6]  eta: 0:00:00  loss: 0.6812 (1.2347)  acc1: 23.4375 (54.0246)  acc5: 100.0000 (100.0000)  time: 0.3023  data: 0.2092  max mem: 9310
+[15:03:15.014526] Test: Total time: 0:00:01 (0.3143 s / it)
+[15:03:15.014580] * Acc@1 54.025 Acc@5 100.000 loss 1.235
+[15:03:15.014683] Accuracy of the network on the 733 test images: 54.0%
+[15:03:15.014693] Max accuracy: 54.57%
+[15:03:15.022380] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:03:16.573009] Epoch: [39]  [ 0/22]  eta: 0:00:34  lr: 0.035466  loss: 1.2020 (1.2020)  time: 1.5459  data: 1.2202  max mem: 9310
+[15:03:22.909402] Epoch: [39]  [20/22]  eta: 0:00:00  lr: 0.034649  loss: 1.1843 (1.2011)  time: 0.3168  data: 0.0009  max mem: 9310
+[15:03:23.225555] Epoch: [39]  [21/22]  eta: 0:00:00  lr: 0.034608  loss: 1.1843 (1.1991)  time: 0.3164  data: 0.0009  max mem: 9310
+[15:03:23.305332] Epoch: [39] Total time: 0:00:08 (0.3765 s / it)
+[15:03:23.305395] Averaged stats: lr: 0.034608  loss: 1.1843 (1.1991)
+[15:03:31.306687] Test:  [0/6]  eta: 0:00:07  loss: 1.6440 (1.6440)  acc1: 15.6250 (15.6250)  acc5: 100.0000 (100.0000)  time: 1.2787  data: 1.1770  max mem: 9310
+[15:03:31.776697] Test:  [5/6]  eta: 0:00:00  loss: 0.6771 (1.2337)  acc1: 23.4375 (54.5703)  acc5: 100.0000 (100.0000)  time: 0.2913  data: 0.1963  max mem: 9310
+[15:03:31.825961] Test: Total time: 0:00:01 (0.3005 s / it)
+[15:03:31.826012] * Acc@1 54.570 Acc@5 100.000 loss 1.234
+[15:03:31.826115] Accuracy of the network on the 733 test images: 54.6%
+[15:03:31.826125] Max accuracy: 54.57%
+[15:03:31.844054] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:03:33.412117] Epoch: [40]  [ 0/22]  eta: 0:00:34  lr: 0.034567  loss: 1.1804 (1.1804)  time: 1.5670  data: 1.2433  max mem: 9310
+[15:03:39.738045] Epoch: [40]  [20/22]  eta: 0:00:00  lr: 0.033737  loss: 1.1937 (1.1956)  time: 0.3163  data: 0.0001  max mem: 9310
+[15:03:40.054825] Epoch: [40]  [21/22]  eta: 0:00:00  lr: 0.033695  loss: 1.1937 (1.1934)  time: 0.3161  data: 0.0001  max mem: 9310
+[15:03:40.146827] Epoch: [40] Total time: 0:00:08 (0.3774 s / it)
+[15:03:40.146897] Averaged stats: lr: 0.033695  loss: 1.1937 (1.1934)
+[15:03:47.440039] Test:  [0/6]  eta: 0:00:07  loss: 1.6381 (1.6381)  acc1: 14.0625 (14.0625)  acc5: 100.0000 (100.0000)  time: 1.2088  data: 1.1124  max mem: 9310
+[15:03:47.902126] Test:  [5/6]  eta: 0:00:00  loss: 0.6804 (1.2331)  acc1: 24.2188 (54.4338)  acc5: 100.0000 (100.0000)  time: 0.2784  data: 0.1855  max mem: 9310
+[15:03:47.951612] Test: Total time: 0:00:01 (0.2868 s / it)
+[15:03:47.951661] * Acc@1 54.434 Acc@5 100.000 loss 1.233
+[15:03:47.951769] Accuracy of the network on the 733 test images: 54.4%
+[15:03:47.951779] Max accuracy: 54.57%
+[15:03:47.958815] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:03:49.545341] Epoch: [41]  [ 0/22]  eta: 0:00:34  lr: 0.033653  loss: 1.2408 (1.2408)  time: 1.5856  data: 1.2618  max mem: 9310
+[15:03:55.881301] Epoch: [41]  [20/22]  eta: 0:00:00  lr: 0.032810  loss: 1.1855 (1.2055)  time: 0.3168  data: 0.0004  max mem: 9310
+[15:03:56.196184] Epoch: [41]  [21/22]  eta: 0:00:00  lr: 0.032768  loss: 1.1855 (1.2032)  time: 0.3164  data: 0.0004  max mem: 9310
+[15:03:56.282978] Epoch: [41] Total time: 0:00:08 (0.3784 s / it)
+[15:03:56.283046] Averaged stats: lr: 0.032768  loss: 1.1855 (1.2032)
+[15:04:03.016514] Test:  [0/6]  eta: 0:00:07  loss: 1.6441 (1.6441)  acc1: 14.0625 (14.0625)  acc5: 100.0000 (100.0000)  time: 1.2405  data: 1.1439  max mem: 9310
+[15:04:03.488417] Test:  [5/6]  eta: 0:00:00  loss: 0.6752 (1.2323)  acc1: 23.4375 (54.2974)  acc5: 100.0000 (100.0000)  time: 0.2853  data: 0.1923  max mem: 9310
+[15:04:03.551148] Test: Total time: 0:00:01 (0.2967 s / it)
+[15:04:03.551202] * Acc@1 54.297 Acc@5 100.000 loss 1.232
+[15:04:03.551323] Accuracy of the network on the 733 test images: 54.3%
+[15:04:03.551334] Max accuracy: 54.57%
+[15:04:03.562091] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:04:05.129454] Epoch: [42]  [ 0/22]  eta: 0:00:34  lr: 0.032725  loss: 1.2276 (1.2276)  time: 1.5664  data: 1.2409  max mem: 9310
+[15:04:11.538958] Epoch: [42]  [20/22]  eta: 0:00:00  lr: 0.031872  loss: 1.1838 (1.1967)  time: 0.3204  data: 0.0036  max mem: 9310
+[15:04:11.854465] Epoch: [42]  [21/22]  eta: 0:00:00  lr: 0.031829  loss: 1.1838 (1.1939)  time: 0.3202  data: 0.0036  max mem: 9310
+[15:04:11.937261] Epoch: [42] Total time: 0:00:08 (0.3807 s / it)
+[15:04:11.937325] Averaged stats: lr: 0.031829  loss: 1.1838 (1.1939)
+[15:04:20.713149] Test:  [0/6]  eta: 0:00:07  loss: 1.6422 (1.6422)  acc1: 14.8438 (14.8438)  acc5: 100.0000 (100.0000)  time: 1.2626  data: 1.1609  max mem: 9310
+[15:04:21.178979] Test:  [5/6]  eta: 0:00:00  loss: 0.6743 (1.2311)  acc1: 25.0000 (54.7067)  acc5: 100.0000 (100.0000)  time: 0.2880  data: 0.1936  max mem: 9310
+[15:04:21.232968] Test: Total time: 0:00:01 (0.2980 s / it)
+[15:04:21.233021] * Acc@1 54.707 Acc@5 100.000 loss 1.231
+[15:04:21.233132] Accuracy of the network on the 733 test images: 54.7%
+[15:04:21.233143] Max accuracy: 54.71%
+[15:04:21.251030] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:04:22.962500] Epoch: [43]  [ 0/22]  eta: 0:00:37  lr: 0.031786  loss: 1.2243 (1.2243)  time: 1.7106  data: 1.3876  max mem: 9310
+[15:04:29.282617] Epoch: [43]  [20/22]  eta: 0:00:00  lr: 0.030923  loss: 1.1779 (1.1940)  time: 0.3160  data: 0.0003  max mem: 9310
+[15:04:29.597078] Epoch: [43]  [21/22]  eta: 0:00:00  lr: 0.030880  loss: 1.1779 (1.1919)  time: 0.3158  data: 0.0003  max mem: 9310
+[15:04:29.675559] Epoch: [43] Total time: 0:00:08 (0.3829 s / it)
+[15:04:29.675622] Averaged stats: lr: 0.030880  loss: 1.1779 (1.1919)
+[15:04:37.876228] Test:  [0/6]  eta: 0:00:07  loss: 1.6388 (1.6388)  acc1: 15.6250 (15.6250)  acc5: 100.0000 (100.0000)  time: 1.2160  data: 1.1196  max mem: 9310
+[15:04:38.348332] Test:  [5/6]  eta: 0:00:00  loss: 0.6750 (1.2308)  acc1: 25.7812 (55.1160)  acc5: 100.0000 (100.0000)  time: 0.2812  data: 0.1882  max mem: 9310
+[15:04:38.412696] Test: Total time: 0:00:01 (0.2930 s / it)
+[15:04:38.412744] * Acc@1 55.116 Acc@5 100.000 loss 1.231
+[15:04:38.412847] Accuracy of the network on the 733 test images: 55.1%
+[15:04:38.412857] Max accuracy: 55.12%
+[15:04:38.428330] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:04:40.005881] Epoch: [44]  [ 0/22]  eta: 0:00:34  lr: 0.030836  loss: 1.2032 (1.2032)  time: 1.5768  data: 1.2558  max mem: 9310
+[15:04:46.330326] Epoch: [44]  [20/22]  eta: 0:00:00  lr: 0.029965  loss: 1.1802 (1.1954)  time: 0.3162  data: 0.0007  max mem: 9310
+[15:04:46.646915] Epoch: [44]  [21/22]  eta: 0:00:00  lr: 0.029921  loss: 1.1802 (1.1936)  time: 0.3159  data: 0.0007  max mem: 9310
+[15:04:46.739026] Epoch: [44] Total time: 0:00:08 (0.3778 s / it)
+[15:04:46.739098] Averaged stats: lr: 0.029921  loss: 1.1802 (1.1936)
+[15:04:54.463149] Test:  [0/6]  eta: 0:00:06  loss: 1.6327 (1.6327)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.1474  data: 1.0507  max mem: 9310
+[15:04:54.933205] Test:  [5/6]  eta: 0:00:00  loss: 0.6800 (1.2301)  acc1: 25.7812 (55.3888)  acc5: 100.0000 (100.0000)  time: 0.2695  data: 0.1766  max mem: 9310
+[15:04:54.988387] Test: Total time: 0:00:01 (0.2796 s / it)
+[15:04:54.988443] * Acc@1 55.389 Acc@5 100.000 loss 1.230
+[15:04:54.988553] Accuracy of the network on the 733 test images: 55.4%
+[15:04:54.988563] Max accuracy: 55.39%
+[15:04:54.995567] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:04:56.559284] Epoch: [45]  [ 0/22]  eta: 0:00:34  lr: 0.029877  loss: 1.2210 (1.2210)  time: 1.5629  data: 1.2406  max mem: 9310
+[15:05:02.890414] Epoch: [45]  [20/22]  eta: 0:00:00  lr: 0.028999  loss: 1.1661 (1.1939)  time: 0.3165  data: 0.0002  max mem: 9310
+[15:05:03.206663] Epoch: [45]  [21/22]  eta: 0:00:00  lr: 0.028955  loss: 1.1667 (1.1927)  time: 0.3162  data: 0.0002  max mem: 9310
+[15:05:03.296712] Epoch: [45] Total time: 0:00:08 (0.3773 s / it)
+[15:05:03.296780] Averaged stats: lr: 0.028955  loss: 1.1667 (1.1927)
+[15:05:11.528107] Test:  [0/6]  eta: 0:00:07  loss: 1.6356 (1.6356)  acc1: 16.4062 (16.4062)  acc5: 100.0000 (100.0000)  time: 1.2911  data: 1.1895  max mem: 9310
+[15:05:12.004092] Test:  [5/6]  eta: 0:00:00  loss: 0.6788 (1.2303)  acc1: 25.7812 (55.1160)  acc5: 100.0000 (100.0000)  time: 0.2944  data: 0.1996  max mem: 9310
+[15:05:12.059497] Test: Total time: 0:00:01 (0.3046 s / it)
+[15:05:12.059557] * Acc@1 55.116 Acc@5 100.000 loss 1.230
+[15:05:12.059667] Accuracy of the network on the 733 test images: 55.1%
+[15:05:12.059678] Max accuracy: 55.39%
+[15:05:12.072807] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:05:13.809740] Epoch: [46]  [ 0/22]  eta: 0:00:38  lr: 0.028911  loss: 1.1879 (1.1879)  time: 1.7361  data: 1.4124  max mem: 9310
+[15:05:20.153025] Epoch: [46]  [20/22]  eta: 0:00:00  lr: 0.028027  loss: 1.1904 (1.1957)  time: 0.3171  data: 0.0001  max mem: 9310
+[15:05:20.468627] Epoch: [46]  [21/22]  eta: 0:00:00  lr: 0.027983  loss: 1.1904 (1.1928)  time: 0.3168  data: 0.0001  max mem: 9310
+[15:05:20.544023] Epoch: [46] Total time: 0:00:08 (0.3851 s / it)
+[15:05:20.544094] Averaged stats: lr: 0.027983  loss: 1.1904 (1.1928)
+[15:05:28.141668] Test:  [0/6]  eta: 0:00:07  loss: 1.6327 (1.6327)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.3085  data: 1.2121  max mem: 9310
+[15:05:28.604387] Test:  [5/6]  eta: 0:00:00  loss: 0.6798 (1.2289)  acc1: 26.5625 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.2951  data: 0.2021  max mem: 9310
+[15:05:28.656618] Test: Total time: 0:00:01 (0.3047 s / it)
+[15:05:28.656669] * Acc@1 55.662 Acc@5 100.000 loss 1.229
+[15:05:28.656781] Accuracy of the network on the 733 test images: 55.7%
+[15:05:28.656792] Max accuracy: 55.66%
+[15:05:28.667302] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:05:30.310722] Epoch: [47]  [ 0/22]  eta: 0:00:36  lr: 0.027938  loss: 1.1908 (1.1908)  time: 1.6389  data: 1.3138  max mem: 9310
+[15:05:36.646778] Epoch: [47]  [20/22]  eta: 0:00:00  lr: 0.027050  loss: 1.1715 (1.1928)  time: 0.3168  data: 0.0009  max mem: 9310
+[15:05:36.961534] Epoch: [47]  [21/22]  eta: 0:00:00  lr: 0.027006  loss: 1.1715 (1.1903)  time: 0.3162  data: 0.0007  max mem: 9310
+[15:05:37.040862] Epoch: [47] Total time: 0:00:08 (0.3806 s / it)
+[15:05:37.040925] Averaged stats: lr: 0.027006  loss: 1.1715 (1.1903)
+[15:05:43.913792] Test:  [0/6]  eta: 0:00:07  loss: 1.6304 (1.6304)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.2088  data: 1.1123  max mem: 9310
+[15:05:44.385391] Test:  [5/6]  eta: 0:00:00  loss: 0.6784 (1.2286)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2800  data: 0.1868  max mem: 9310
+[15:05:44.438309] Test: Total time: 0:00:01 (0.2897 s / it)
+[15:05:44.438361] * Acc@1 55.525 Acc@5 100.000 loss 1.229
+[15:05:44.438472] Accuracy of the network on the 733 test images: 55.5%
+[15:05:44.438483] Max accuracy: 55.66%
+[15:05:44.448769] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:05:46.153022] Epoch: [48]  [ 0/22]  eta: 0:00:37  lr: 0.026961  loss: 1.2162 (1.2162)  time: 1.7033  data: 1.3763  max mem: 9310
+[15:05:52.510748] Epoch: [48]  [20/22]  eta: 0:00:00  lr: 0.026071  loss: 1.1854 (1.1956)  time: 0.3179  data: 0.0011  max mem: 9310
+[15:05:52.827609] Epoch: [48]  [21/22]  eta: 0:00:00  lr: 0.026026  loss: 1.1854 (1.1941)  time: 0.3171  data: 0.0007  max mem: 9310
+[15:05:52.899417] Epoch: [48] Total time: 0:00:08 (0.3841 s / it)
+[15:05:52.899484] Averaged stats: lr: 0.026026  loss: 1.1854 (1.1941)
+[15:06:00.373234] Test:  [0/6]  eta: 0:00:07  loss: 1.6401 (1.6401)  acc1: 15.6250 (15.6250)  acc5: 100.0000 (100.0000)  time: 1.2025  data: 1.1008  max mem: 9310
+[15:06:00.857406] Test:  [5/6]  eta: 0:00:00  loss: 0.6706 (1.2286)  acc1: 25.7812 (55.2524)  acc5: 100.0000 (100.0000)  time: 0.2810  data: 0.1850  max mem: 9310
+[15:06:00.928567] Test: Total time: 0:00:01 (0.2938 s / it)
+[15:06:00.928629] * Acc@1 55.252 Acc@5 100.000 loss 1.229
+[15:06:00.928761] Accuracy of the network on the 733 test images: 55.3%
+[15:06:00.928771] Max accuracy: 55.66%
+[15:06:00.937394] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:06:02.387127] Epoch: [49]  [ 0/22]  eta: 0:00:31  lr: 0.025981  loss: 1.2034 (1.2034)  time: 1.4488  data: 1.1214  max mem: 9310
+[15:06:08.728613] Epoch: [49]  [20/22]  eta: 0:00:00  lr: 0.025089  loss: 1.1692 (1.1919)  time: 0.3170  data: 0.0007  max mem: 9310
+[15:06:09.044423] Epoch: [49]  [21/22]  eta: 0:00:00  lr: 0.025045  loss: 1.1692 (1.1907)  time: 0.3167  data: 0.0007  max mem: 9310
+[15:06:09.133562] Epoch: [49] Total time: 0:00:08 (0.3726 s / it)
+[15:06:09.133630] Averaged stats: lr: 0.025045  loss: 1.1692 (1.1907)
+[15:06:16.364948] Test:  [0/6]  eta: 0:00:07  loss: 1.6322 (1.6322)  acc1: 16.4062 (16.4062)  acc5: 100.0000 (100.0000)  time: 1.1999  data: 1.1033  max mem: 9310
+[15:06:16.835148] Test:  [5/6]  eta: 0:00:00  loss: 0.6753 (1.2282)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2783  data: 0.1852  max mem: 9310
+[15:06:16.892124] Test: Total time: 0:00:01 (0.2887 s / it)
+[15:06:16.892175] * Acc@1 55.525 Acc@5 100.000 loss 1.228
+[15:06:16.892286] Accuracy of the network on the 733 test images: 55.5%
+[15:06:16.892295] Max accuracy: 55.66%
+[15:06:16.902693] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:06:18.311180] Epoch: [50]  [ 0/22]  eta: 0:00:30  lr: 0.025000  loss: 1.1852 (1.1852)  time: 1.4039  data: 1.0827  max mem: 9310
+[15:06:24.841396] Epoch: [50]  [20/22]  eta: 0:00:00  lr: 0.024108  loss: 1.1820 (1.1958)  time: 0.3265  data: 0.0099  max mem: 9310
+[15:06:25.158695] Epoch: [50]  [21/22]  eta: 0:00:00  lr: 0.024063  loss: 1.1820 (1.1930)  time: 0.3165  data: 0.0003  max mem: 9310
+[15:06:25.254365] Epoch: [50] Total time: 0:00:08 (0.3796 s / it)
+[15:06:25.254434] Averaged stats: lr: 0.024063  loss: 1.1820 (1.1930)
+[15:06:31.583841] Test:  [0/6]  eta: 0:00:06  loss: 1.6295 (1.6295)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.0968  data: 1.0001  max mem: 9310
+[15:06:32.053114] Test:  [5/6]  eta: 0:00:00  loss: 0.6755 (1.2270)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2609  data: 0.1678  max mem: 9310
+[15:06:32.100314] Test: Total time: 0:00:01 (0.2696 s / it)
+[15:06:32.100369] * Acc@1 55.525 Acc@5 100.000 loss 1.227
+[15:06:32.100474] Accuracy of the network on the 733 test images: 55.5%
+[15:06:32.100483] Max accuracy: 55.66%
+[15:06:32.109587] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:06:33.599272] Epoch: [51]  [ 0/22]  eta: 0:00:32  lr: 0.024019  loss: 1.1925 (1.1925)  time: 1.4888  data: 1.1687  max mem: 9310
+[15:06:39.939403] Epoch: [51]  [20/22]  eta: 0:00:00  lr: 0.023128  loss: 1.1992 (1.1924)  time: 0.3170  data: 0.0013  max mem: 9310
+[15:06:40.255733] Epoch: [51]  [21/22]  eta: 0:00:00  lr: 0.023083  loss: 1.1992 (1.1892)  time: 0.3169  data: 0.0013  max mem: 9310
+[15:06:40.359188] Epoch: [51] Total time: 0:00:08 (0.3750 s / it)
+[15:06:40.359265] Averaged stats: lr: 0.023083  loss: 1.1992 (1.1892)
+[15:06:47.916659] Test:  [0/6]  eta: 0:00:07  loss: 1.6318 (1.6318)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.2090  data: 1.1073  max mem: 9310
+[15:06:48.439727] Test:  [5/6]  eta: 0:00:00  loss: 0.6737 (1.2270)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2886  data: 0.1942  max mem: 9310
+[15:06:48.498578] Test: Total time: 0:00:01 (0.2993 s / it)
+[15:06:48.498632] * Acc@1 55.525 Acc@5 100.000 loss 1.227
+[15:06:48.498742] Accuracy of the network on the 733 test images: 55.5%
+[15:06:48.498752] Max accuracy: 55.66%
+[15:06:48.510021] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:06:50.052290] Epoch: [52]  [ 0/22]  eta: 0:00:33  lr: 0.023039  loss: 1.1755 (1.1755)  time: 1.5414  data: 1.2184  max mem: 9310
+[15:06:56.674012] Epoch: [52]  [20/22]  eta: 0:00:00  lr: 0.022150  loss: 1.1694 (1.1923)  time: 0.3310  data: 0.0140  max mem: 9310
+[15:06:56.991090] Epoch: [52]  [21/22]  eta: 0:00:00  lr: 0.022106  loss: 1.1752 (1.1916)  time: 0.3302  data: 0.0135  max mem: 9310
+[15:06:57.067580] Epoch: [52] Total time: 0:00:08 (0.3890 s / it)
+[15:06:57.067644] Averaged stats: lr: 0.022106  loss: 1.1752 (1.1916)
+[15:07:04.594664] Test:  [0/6]  eta: 0:00:07  loss: 1.6403 (1.6403)  acc1: 16.4062 (16.4062)  acc5: 100.0000 (100.0000)  time: 1.2571  data: 1.1607  max mem: 9310
+[15:07:05.058591] Test:  [5/6]  eta: 0:00:00  loss: 0.6686 (1.2271)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2867  data: 0.1935  max mem: 9310
+[15:07:05.111688] Test: Total time: 0:00:01 (0.2965 s / it)
+[15:07:05.111740] * Acc@1 55.525 Acc@5 100.000 loss 1.227
+[15:07:05.111849] Accuracy of the network on the 733 test images: 55.5%
+[15:07:05.111859] Max accuracy: 55.66%
+[15:07:05.122596] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:07:06.653114] Epoch: [53]  [ 0/22]  eta: 0:00:33  lr: 0.022062  loss: 1.2181 (1.2181)  time: 1.5296  data: 1.2027  max mem: 9310
+[15:07:13.093712] Epoch: [53]  [20/22]  eta: 0:00:00  lr: 0.021177  loss: 1.1869 (1.1935)  time: 0.3220  data: 0.0059  max mem: 9310
+[15:07:13.408325] Epoch: [53]  [21/22]  eta: 0:00:00  lr: 0.021133  loss: 1.1869 (1.1927)  time: 0.3218  data: 0.0059  max mem: 9310
+[15:07:13.482567] Epoch: [53] Total time: 0:00:08 (0.3800 s / it)
+[15:07:13.482633] Averaged stats: lr: 0.021133  loss: 1.1869 (1.1927)
+[15:07:19.871181] Test:  [0/6]  eta: 0:00:07  loss: 1.6266 (1.6266)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.2802  data: 1.1836  max mem: 9310
+[15:07:20.333685] Test:  [5/6]  eta: 0:00:00  loss: 0.6750 (1.2261)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2903  data: 0.1974  max mem: 9310
+[15:07:20.387497] Test: Total time: 0:00:01 (0.3002 s / it)
+[15:07:20.387549] * Acc@1 55.525 Acc@5 100.000 loss 1.226
+[15:07:20.387656] Accuracy of the network on the 733 test images: 55.5%
+[15:07:20.387666] Max accuracy: 55.66%
+[15:07:20.400185] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:07:22.120393] Epoch: [54]  [ 0/22]  eta: 0:00:37  lr: 0.021089  loss: 1.2047 (1.2047)  time: 1.7194  data: 1.3949  max mem: 9310
+[15:07:28.437371] Epoch: [54]  [20/22]  eta: 0:00:00  lr: 0.020210  loss: 1.1776 (1.1922)  time: 0.3158  data: 0.0003  max mem: 9310
+[15:07:28.752742] Epoch: [54]  [21/22]  eta: 0:00:00  lr: 0.020167  loss: 1.1776 (1.1897)  time: 0.3155  data: 0.0003  max mem: 9310
+[15:07:28.841297] Epoch: [54] Total time: 0:00:08 (0.3837 s / it)
+[15:07:28.841363] Averaged stats: lr: 0.020167  loss: 1.1776 (1.1897)
+[15:07:35.606875] Test:  [0/6]  eta: 0:00:07  loss: 1.6338 (1.6338)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.2486  data: 1.1472  max mem: 9310
+[15:07:36.074978] Test:  [5/6]  eta: 0:00:00  loss: 0.6712 (1.2254)  acc1: 25.7812 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.2860  data: 0.1913  max mem: 9310
+[15:07:36.139004] Test: Total time: 0:00:01 (0.2969 s / it)
+[15:07:36.139050] * Acc@1 55.662 Acc@5 100.000 loss 1.225
+[15:07:36.139150] Accuracy of the network on the 733 test images: 55.7%
+[15:07:36.139160] Max accuracy: 55.66%
+[15:07:36.145911] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:07:37.559395] Epoch: [55]  [ 0/22]  eta: 0:00:31  lr: 0.020123  loss: 1.1732 (1.1732)  time: 1.4127  data: 1.0902  max mem: 9310
+[15:07:43.981995] Epoch: [55]  [20/22]  eta: 0:00:00  lr: 0.019251  loss: 1.1794 (1.1961)  time: 0.3211  data: 0.0054  max mem: 9310
+[15:07:44.298290] Epoch: [55]  [21/22]  eta: 0:00:00  lr: 0.019207  loss: 1.1794 (1.1936)  time: 0.3211  data: 0.0054  max mem: 9310
+[15:07:44.398656] Epoch: [55] Total time: 0:00:08 (0.3751 s / it)
+[15:07:44.398724] Averaged stats: lr: 0.019207  loss: 1.1794 (1.1936)
+[15:07:50.768146] Test:  [0/6]  eta: 0:00:07  loss: 1.6277 (1.6277)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.2028  data: 1.1056  max mem: 9310
+[15:07:51.243252] Test:  [5/6]  eta: 0:00:00  loss: 0.6733 (1.2255)  acc1: 26.5625 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2795  data: 0.1864  max mem: 9310
+[15:07:51.302750] Test: Total time: 0:00:01 (0.2904 s / it)
+[15:07:51.302803] * Acc@1 55.525 Acc@5 100.000 loss 1.225
+[15:07:51.302929] Accuracy of the network on the 733 test images: 55.5%
+[15:07:51.302939] Max accuracy: 55.66%
+[15:07:51.311502] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:07:52.766635] Epoch: [56]  [ 0/22]  eta: 0:00:31  lr: 0.019164  loss: 1.2047 (1.2047)  time: 1.4543  data: 1.1319  max mem: 9310
+[15:07:59.198009] Epoch: [56]  [20/22]  eta: 0:00:00  lr: 0.018300  loss: 1.1936 (1.1934)  time: 0.3215  data: 0.0060  max mem: 9310
+[15:07:59.513187] Epoch: [56]  [21/22]  eta: 0:00:00  lr: 0.018257  loss: 1.1936 (1.1910)  time: 0.3159  data: 0.0007  max mem: 9310
+[15:07:59.608064] Epoch: [56] Total time: 0:00:08 (0.3771 s / it)
+[15:07:59.608136] Averaged stats: lr: 0.018257  loss: 1.1936 (1.1910)
+[15:08:06.488687] Test:  [0/6]  eta: 0:00:07  loss: 1.6321 (1.6321)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.2327  data: 1.1363  max mem: 9310
+[15:08:06.951366] Test:  [5/6]  eta: 0:00:00  loss: 0.6720 (1.2254)  acc1: 25.7812 (55.3888)  acc5: 100.0000 (100.0000)  time: 0.2824  data: 0.1895  max mem: 9310
+[15:08:07.003977] Test: Total time: 0:00:01 (0.2921 s / it)
+[15:08:07.004029] * Acc@1 55.389 Acc@5 100.000 loss 1.225
+[15:08:07.004136] Accuracy of the network on the 733 test images: 55.4%
+[15:08:07.004146] Max accuracy: 55.66%
+[15:08:07.013080] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:08:08.419304] Epoch: [57]  [ 0/22]  eta: 0:00:30  lr: 0.018214  loss: 1.1935 (1.1935)  time: 1.4053  data: 1.0828  max mem: 9310
+[15:08:14.798615] Epoch: [57]  [20/22]  eta: 0:00:00  lr: 0.017360  loss: 1.1878 (1.1914)  time: 0.3189  data: 0.0033  max mem: 9310
+[15:08:15.113080] Epoch: [57]  [21/22]  eta: 0:00:00  lr: 0.017317  loss: 1.1878 (1.1898)  time: 0.3182  data: 0.0030  max mem: 9310
+[15:08:15.210030] Epoch: [57] Total time: 0:00:08 (0.3726 s / it)
+[15:08:15.210099] Averaged stats: lr: 0.017317  loss: 1.1878 (1.1898)
+[15:08:20.954952] Test:  [0/6]  eta: 0:00:07  loss: 1.6353 (1.6353)  acc1: 16.4062 (16.4062)  acc5: 100.0000 (100.0000)  time: 1.3068  data: 1.2052  max mem: 9310
+[15:08:21.420064] Test:  [5/6]  eta: 0:00:00  loss: 0.6691 (1.2256)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2952  data: 0.2010  max mem: 9310
+[15:08:21.483705] Test: Total time: 0:00:01 (0.3067 s / it)
+[15:08:21.483753] * Acc@1 55.525 Acc@5 100.000 loss 1.226
+[15:08:21.483852] Accuracy of the network on the 733 test images: 55.5%
+[15:08:21.483862] Max accuracy: 55.66%
+[15:08:21.490903] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:08:22.870109] Epoch: [58]  [ 0/22]  eta: 0:00:30  lr: 0.017275  loss: 1.1848 (1.1848)  time: 1.3784  data: 1.0557  max mem: 9310
+[15:08:29.296418] Epoch: [58]  [20/22]  eta: 0:00:00  lr: 0.016431  loss: 1.1951 (1.1969)  time: 0.3213  data: 0.0051  max mem: 9310
+[15:08:29.612836] Epoch: [58]  [21/22]  eta: 0:00:00  lr: 0.016389  loss: 1.1951 (1.1936)  time: 0.3209  data: 0.0051  max mem: 9310
+[15:08:29.709517] Epoch: [58] Total time: 0:00:08 (0.3736 s / it)
+[15:08:29.709589] Averaged stats: lr: 0.016389  loss: 1.1951 (1.1936)
+[15:08:35.837279] Test:  [0/6]  eta: 0:00:07  loss: 1.6330 (1.6330)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.1823  data: 1.0854  max mem: 9310
+[15:08:36.310105] Test:  [5/6]  eta: 0:00:00  loss: 0.6706 (1.2250)  acc1: 25.7812 (55.3888)  acc5: 100.0000 (100.0000)  time: 0.2757  data: 0.1823  max mem: 9310
+[15:08:36.373969] Test: Total time: 0:00:01 (0.2873 s / it)
+[15:08:36.374019] * Acc@1 55.389 Acc@5 100.000 loss 1.225
+[15:08:36.374122] Accuracy of the network on the 733 test images: 55.4%
+[15:08:36.374132] Max accuracy: 55.66%
+[15:08:36.384730] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:08:38.065257] Epoch: [59]  [ 0/22]  eta: 0:00:36  lr: 0.016347  loss: 1.2080 (1.2080)  time: 1.6798  data: 1.3547  max mem: 9310
+[15:08:44.390775] Epoch: [59]  [20/22]  eta: 0:00:00  lr: 0.015515  loss: 1.1836 (1.1948)  time: 0.3162  data: 0.0002  max mem: 9310
+[15:08:44.706521] Epoch: [59]  [21/22]  eta: 0:00:00  lr: 0.015474  loss: 1.1836 (1.1938)  time: 0.3161  data: 0.0002  max mem: 9310
+[15:08:44.798431] Epoch: [59] Total time: 0:00:08 (0.3824 s / it)
+[15:08:44.798500] Averaged stats: lr: 0.015474  loss: 1.1836 (1.1938)
+[15:08:52.015346] Test:  [0/6]  eta: 0:00:06  loss: 1.6377 (1.6377)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.1570  data: 1.0605  max mem: 9310
+[15:08:52.483991] Test:  [5/6]  eta: 0:00:00  loss: 0.6661 (1.2249)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2708  data: 0.1779  max mem: 9310
+[15:08:52.532883] Test: Total time: 0:00:01 (0.2798 s / it)
+[15:08:52.532931] * Acc@1 55.525 Acc@5 100.000 loss 1.225
+[15:08:52.533030] Accuracy of the network on the 733 test images: 55.5%
+[15:08:52.533039] Max accuracy: 55.66%
+[15:08:52.545200] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:08:54.577900] Epoch: [60]  [ 0/22]  eta: 0:00:44  lr: 0.015433  loss: 1.1979 (1.1979)  time: 2.0319  data: 1.7116  max mem: 9310
+[15:09:01.041900] Epoch: [60]  [20/22]  eta: 0:00:00  lr: 0.014615  loss: 1.1902 (1.1875)  time: 0.3232  data: 0.0063  max mem: 9310
+[15:09:01.357697] Epoch: [60]  [21/22]  eta: 0:00:00  lr: 0.014574  loss: 1.1902 (1.1846)  time: 0.3228  data: 0.0063  max mem: 9310
+[15:09:01.447371] Epoch: [60] Total time: 0:00:08 (0.4046 s / it)
+[15:09:01.447437] Averaged stats: lr: 0.014574  loss: 1.1902 (1.1846)
+[15:09:09.557170] Test:  [0/6]  eta: 0:00:07  loss: 1.6354 (1.6354)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.1755  data: 1.0739  max mem: 9310
+[15:09:10.028051] Test:  [5/6]  eta: 0:00:00  loss: 0.6679 (1.2243)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2743  data: 0.1791  max mem: 9310
+[15:09:10.081333] Test: Total time: 0:00:01 (0.2841 s / it)
+[15:09:10.081387] * Acc@1 55.798 Acc@5 100.000 loss 1.224
+[15:09:10.081495] Accuracy of the network on the 733 test images: 55.8%
+[15:09:10.081505] Max accuracy: 55.80%
+[15:09:10.089028] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:09:11.693577] Epoch: [61]  [ 0/22]  eta: 0:00:35  lr: 0.014534  loss: 1.1697 (1.1697)  time: 1.6036  data: 1.2777  max mem: 9310
+[15:09:18.042205] Epoch: [61]  [20/22]  eta: 0:00:00  lr: 0.013730  loss: 1.1709 (1.1871)  time: 0.3174  data: 0.0007  max mem: 9310
+[15:09:18.357715] Epoch: [61]  [21/22]  eta: 0:00:00  lr: 0.013690  loss: 1.1709 (1.1848)  time: 0.3170  data: 0.0006  max mem: 9310
+[15:09:18.434718] Epoch: [61] Total time: 0:00:08 (0.3793 s / it)
+[15:09:18.434786] Averaged stats: lr: 0.013690  loss: 1.1709 (1.1848)
+[15:09:26.029065] Test:  [0/6]  eta: 0:00:07  loss: 1.6249 (1.6249)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2660  data: 1.1694  max mem: 9310
+[15:09:26.499940] Test:  [5/6]  eta: 0:00:00  loss: 0.6752 (1.2238)  acc1: 26.5625 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2894  data: 0.1963  max mem: 9310
+[15:09:26.556112] Test: Total time: 0:00:01 (0.2997 s / it)
+[15:09:26.556165] * Acc@1 55.525 Acc@5 100.000 loss 1.224
+[15:09:26.556288] Accuracy of the network on the 733 test images: 55.5%
+[15:09:26.556298] Max accuracy: 55.80%
+[15:09:26.570983] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:09:27.966872] Epoch: [62]  [ 0/22]  eta: 0:00:30  lr: 0.013650  loss: 1.1599 (1.1599)  time: 1.3924  data: 1.0694  max mem: 9310
+[15:09:34.531330] Epoch: [62]  [20/22]  eta: 0:00:00  lr: 0.012862  loss: 1.1820 (1.1869)  time: 0.3282  data: 0.0106  max mem: 9310
+[15:09:34.846197] Epoch: [62]  [21/22]  eta: 0:00:00  lr: 0.012823  loss: 1.1820 (1.1839)  time: 0.3170  data: 0.0001  max mem: 9310
+[15:09:34.914730] Epoch: [62] Total time: 0:00:08 (0.3793 s / it)
+[15:09:34.914793] Averaged stats: lr: 0.012823  loss: 1.1820 (1.1839)
+[15:09:41.022391] Test:  [0/6]  eta: 0:00:07  loss: 1.6377 (1.6377)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2791  data: 1.1819  max mem: 9310
+[15:09:41.492721] Test:  [5/6]  eta: 0:00:00  loss: 0.6667 (1.2243)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2914  data: 0.1984  max mem: 9310
+[15:09:41.548345] Test: Total time: 0:00:01 (0.3016 s / it)
+[15:09:41.548393] * Acc@1 55.798 Acc@5 100.000 loss 1.224
+[15:09:41.548495] Accuracy of the network on the 733 test images: 55.8%
+[15:09:41.548504] Max accuracy: 55.80%
+[15:09:41.555746] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:09:43.033782] Epoch: [63]  [ 0/22]  eta: 0:00:32  lr: 0.012784  loss: 1.1853 (1.1853)  time: 1.4771  data: 1.1556  max mem: 9310
+[15:09:49.454301] Epoch: [63]  [20/22]  eta: 0:00:00  lr: 0.012014  loss: 1.1865 (1.1900)  time: 0.3210  data: 0.0038  max mem: 9310
+[15:09:49.769788] Epoch: [63]  [21/22]  eta: 0:00:00  lr: 0.011976  loss: 1.1865 (1.1876)  time: 0.3208  data: 0.0038  max mem: 9310
+[15:09:49.841747] Epoch: [63] Total time: 0:00:08 (0.3766 s / it)
+[15:09:49.841812] Averaged stats: lr: 0.011976  loss: 1.1865 (1.1876)
+[15:09:56.363315] Test:  [0/6]  eta: 0:00:07  loss: 1.6284 (1.6284)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2506  data: 1.1491  max mem: 9310
+[15:09:56.828659] Test:  [5/6]  eta: 0:00:00  loss: 0.6714 (1.2239)  acc1: 26.5625 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2859  data: 0.1916  max mem: 9310
+[15:09:56.887525] Test: Total time: 0:00:01 (0.2966 s / it)
+[15:09:56.887583] * Acc@1 55.525 Acc@5 100.000 loss 1.224
+[15:09:56.887693] Accuracy of the network on the 733 test images: 55.5%
+[15:09:56.887704] Max accuracy: 55.80%
+[15:09:56.895537] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:09:58.450628] Epoch: [64]  [ 0/22]  eta: 0:00:34  lr: 0.011938  loss: 1.2187 (1.2187)  time: 1.5541  data: 1.2280  max mem: 9310
+[15:10:05.007897] Epoch: [64]  [20/22]  eta: 0:00:00  lr: 0.011185  loss: 1.1897 (1.1919)  time: 0.3278  data: 0.0114  max mem: 9310
+[15:10:05.323728] Epoch: [64]  [21/22]  eta: 0:00:00  lr: 0.011148  loss: 1.1897 (1.1894)  time: 0.3277  data: 0.0114  max mem: 9310
+[15:10:05.398530] Epoch: [64] Total time: 0:00:08 (0.3865 s / it)
+[15:10:05.398587] Averaged stats: lr: 0.011148  loss: 1.1897 (1.1894)
+[15:10:13.156138] Test:  [0/6]  eta: 0:00:07  loss: 1.6363 (1.6363)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2969  data: 1.2004  max mem: 9310
+[15:10:13.618708] Test:  [5/6]  eta: 0:00:00  loss: 0.6660 (1.2235)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2931  data: 0.2002  max mem: 9310
+[15:10:13.669777] Test: Total time: 0:00:01 (0.3027 s / it)
+[15:10:13.669827] * Acc@1 55.798 Acc@5 100.000 loss 1.224
+[15:10:13.669935] Accuracy of the network on the 733 test images: 55.8%
+[15:10:13.669945] Max accuracy: 55.80%
+[15:10:13.679536] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:10:15.355567] Epoch: [65]  [ 0/22]  eta: 0:00:36  lr: 0.011111  loss: 1.2025 (1.2025)  time: 1.6753  data: 1.3405  max mem: 9310
+[15:10:21.696340] Epoch: [65]  [20/22]  eta: 0:00:00  lr: 0.010378  loss: 1.1770 (1.1894)  time: 0.3170  data: 0.0013  max mem: 9310
+[15:10:22.010156] Epoch: [65]  [21/22]  eta: 0:00:00  lr: 0.010341  loss: 1.1770 (1.1876)  time: 0.3168  data: 0.0010  max mem: 9310
+[15:10:22.086725] Epoch: [65] Total time: 0:00:08 (0.3821 s / it)
+[15:10:22.086785] Averaged stats: lr: 0.010341  loss: 1.1770 (1.1876)
+[15:10:29.248035] Test:  [0/6]  eta: 0:00:08  loss: 1.6315 (1.6315)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.3497  data: 1.2533  max mem: 9310
+[15:10:29.710429] Test:  [5/6]  eta: 0:00:00  loss: 0.6687 (1.2232)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.3019  data: 0.2090  max mem: 9310
+[15:10:29.763418] Test: Total time: 0:00:01 (0.3117 s / it)
+[15:10:29.763470] * Acc@1 55.525 Acc@5 100.000 loss 1.223
+[15:10:29.763585] Accuracy of the network on the 733 test images: 55.5%
+[15:10:29.763595] Max accuracy: 55.80%
+[15:10:29.771264] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:10:31.233919] Epoch: [66]  [ 0/22]  eta: 0:00:32  lr: 0.010305  loss: 1.1953 (1.1953)  time: 1.4594  data: 1.1334  max mem: 9310
+[15:10:37.696894] Epoch: [66]  [20/22]  eta: 0:00:00  lr: 0.009593  loss: 1.1835 (1.1920)  time: 0.3231  data: 0.0072  max mem: 9310
+[15:10:38.012530] Epoch: [66]  [21/22]  eta: 0:00:00  lr: 0.009558  loss: 1.1835 (1.1895)  time: 0.3170  data: 0.0013  max mem: 9310
+[15:10:38.097466] Epoch: [66] Total time: 0:00:08 (0.3785 s / it)
+[15:10:38.097532] Averaged stats: lr: 0.009558  loss: 1.1835 (1.1895)
+[15:10:44.834688] Test:  [0/6]  eta: 0:00:07  loss: 1.6361 (1.6361)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2803  data: 1.1786  max mem: 9310
+[15:10:45.299646] Test:  [5/6]  eta: 0:00:00  loss: 0.6648 (1.2231)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2908  data: 0.1965  max mem: 9310
+[15:10:45.370627] Test: Total time: 0:00:01 (0.3036 s / it)
+[15:10:45.370674] * Acc@1 55.798 Acc@5 100.000 loss 1.223
+[15:10:45.370774] Accuracy of the network on the 733 test images: 55.8%
+[15:10:45.370783] Max accuracy: 55.80%
+[15:10:45.382256] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:10:47.091847] Epoch: [67]  [ 0/22]  eta: 0:00:37  lr: 0.009523  loss: 1.1877 (1.1877)  time: 1.7088  data: 1.3900  max mem: 9310
+[15:10:53.432366] Epoch: [67]  [20/22]  eta: 0:00:00  lr: 0.008832  loss: 1.1829 (1.1878)  time: 0.3170  data: 0.0013  max mem: 9310
+[15:10:53.747952] Epoch: [67]  [21/22]  eta: 0:00:00  lr: 0.008798  loss: 1.1829 (1.1851)  time: 0.3170  data: 0.0013  max mem: 9310
+[15:10:53.833501] Epoch: [67] Total time: 0:00:08 (0.3841 s / it)
+[15:10:53.833569] Averaged stats: lr: 0.008798  loss: 1.1829 (1.1851)
+[15:11:00.838462] Test:  [0/6]  eta: 0:00:07  loss: 1.6349 (1.6349)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2428  data: 1.1461  max mem: 9310
+[15:11:01.309969] Test:  [5/6]  eta: 0:00:00  loss: 0.6661 (1.2234)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2856  data: 0.1926  max mem: 9310
+[15:11:01.362229] Test: Total time: 0:00:01 (0.2954 s / it)
+[15:11:01.362288] * Acc@1 55.525 Acc@5 100.000 loss 1.223
+[15:11:01.362403] Accuracy of the network on the 733 test images: 55.5%
+[15:11:01.362414] Max accuracy: 55.80%
+[15:11:01.370410] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:11:03.120349] Epoch: [68]  [ 0/22]  eta: 0:00:38  lr: 0.008764  loss: 1.1935 (1.1935)  time: 1.7463  data: 1.4194  max mem: 9310
+[15:11:09.449874] Epoch: [68]  [20/22]  eta: 0:00:00  lr: 0.008096  loss: 1.1826 (1.1886)  time: 0.3164  data: 0.0006  max mem: 9310
+[15:11:09.766843] Epoch: [68]  [21/22]  eta: 0:00:00  lr: 0.008063  loss: 1.1826 (1.1875)  time: 0.3161  data: 0.0006  max mem: 9310
+[15:11:09.843614] Epoch: [68] Total time: 0:00:08 (0.3851 s / it)
+[15:11:09.843686] Averaged stats: lr: 0.008063  loss: 1.1826 (1.1875)
+[15:11:15.903441] Test:  [0/6]  eta: 0:00:07  loss: 1.6402 (1.6402)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.1864  data: 1.0896  max mem: 9310
+[15:11:16.373638] Test:  [5/6]  eta: 0:00:00  loss: 0.6648 (1.2241)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2760  data: 0.1830  max mem: 9310
+[15:11:16.432417] Test: Total time: 0:00:01 (0.2867 s / it)
+[15:11:16.432468] * Acc@1 55.525 Acc@5 100.000 loss 1.224
+[15:11:16.432570] Accuracy of the network on the 733 test images: 55.5%
+[15:11:16.432580] Max accuracy: 55.80%
+[15:11:16.442022] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:11:17.986104] Epoch: [69]  [ 0/22]  eta: 0:00:33  lr: 0.008030  loss: 1.1963 (1.1963)  time: 1.5400  data: 1.2123  max mem: 9310
+[15:11:24.318319] Epoch: [69]  [20/22]  eta: 0:00:00  lr: 0.007386  loss: 1.1756 (1.1871)  time: 0.3166  data: 0.0008  max mem: 9310
+[15:11:24.633666] Epoch: [69]  [21/22]  eta: 0:00:00  lr: 0.007354  loss: 1.1756 (1.1843)  time: 0.3161  data: 0.0008  max mem: 9310
+[15:11:24.723874] Epoch: [69] Total time: 0:00:08 (0.3764 s / it)
+[15:11:24.723945] Averaged stats: lr: 0.007354  loss: 1.1756 (1.1843)
+[15:11:30.397269] Test:  [0/6]  eta: 0:00:08  loss: 1.6349 (1.6349)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.3624  data: 1.2660  max mem: 9310
+[15:11:30.860050] Test:  [5/6]  eta: 0:00:00  loss: 0.6659 (1.2227)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.3041  data: 0.2111  max mem: 9310
+[15:11:30.914783] Test: Total time: 0:00:01 (0.3135 s / it)
+[15:11:30.914837] * Acc@1 55.525 Acc@5 100.000 loss 1.223
+[15:11:30.914954] Accuracy of the network on the 733 test images: 55.5%
+[15:11:30.914964] Max accuracy: 55.80%
+[15:11:30.924517] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:11:32.361503] Epoch: [70]  [ 0/22]  eta: 0:00:31  lr: 0.007322  loss: 1.1808 (1.1808)  time: 1.4326  data: 1.1078  max mem: 9310
+[15:11:38.881313] Epoch: [70]  [20/22]  eta: 0:00:00  lr: 0.006703  loss: 1.1843 (1.1936)  time: 0.3260  data: 0.0101  max mem: 9310
+[15:11:39.196195] Epoch: [70]  [21/22]  eta: 0:00:00  lr: 0.006672  loss: 1.1843 (1.1900)  time: 0.3157  data: 0.0003  max mem: 9310
+[15:11:39.272577] Epoch: [70] Total time: 0:00:08 (0.3795 s / it)
+[15:11:39.272650] Averaged stats: lr: 0.006672  loss: 1.1843 (1.1900)
+[15:11:45.914320] Test:  [0/6]  eta: 0:00:07  loss: 1.6372 (1.6372)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.1925  data: 1.0908  max mem: 9310
+[15:11:46.386548] Test:  [5/6]  eta: 0:00:00  loss: 0.6650 (1.2230)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2773  data: 0.1832  max mem: 9310
+[15:11:46.436647] Test: Total time: 0:00:01 (0.2866 s / it)
+[15:11:46.436697] * Acc@1 55.525 Acc@5 100.000 loss 1.223
+[15:11:46.436801] Accuracy of the network on the 733 test images: 55.5%
+[15:11:46.436811] Max accuracy: 55.80%
+[15:11:46.445435] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:11:47.880567] Epoch: [71]  [ 0/22]  eta: 0:00:31  lr: 0.006642  loss: 1.2141 (1.2141)  time: 1.4306  data: 1.1071  max mem: 9310
+[15:11:54.278910] Epoch: [71]  [20/22]  eta: 0:00:00  lr: 0.006048  loss: 1.1731 (1.1921)  time: 0.3199  data: 0.0036  max mem: 9310
+[15:11:54.594907] Epoch: [71]  [21/22]  eta: 0:00:00  lr: 0.006019  loss: 1.1731 (1.1901)  time: 0.3196  data: 0.0036  max mem: 9310
+[15:11:54.684104] Epoch: [71] Total time: 0:00:08 (0.3745 s / it)
+[15:11:54.684176] Averaged stats: lr: 0.006019  loss: 1.1731 (1.1901)
+[15:12:00.315283] Test:  [0/6]  eta: 0:00:06  loss: 1.6375 (1.6375)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.1144  data: 1.0179  max mem: 9310
+[15:12:00.831469] Test:  [5/6]  eta: 0:00:00  loss: 0.6653 (1.2230)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2717  data: 0.1787  max mem: 9310
+[15:12:00.878515] Test: Total time: 0:00:01 (0.2804 s / it)
+[15:12:00.878569] * Acc@1 55.798 Acc@5 100.000 loss 1.223
+[15:12:00.878679] Accuracy of the network on the 733 test images: 55.8%
+[15:12:00.878690] Max accuracy: 55.80%
+[15:12:00.887492] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:12:02.200392] Epoch: [72]  [ 0/22]  eta: 0:00:28  lr: 0.005990  loss: 1.1849 (1.1849)  time: 1.3121  data: 0.9880  max mem: 9310
+[15:12:08.653623] Epoch: [72]  [20/22]  eta: 0:00:00  lr: 0.005422  loss: 1.1720 (1.1844)  time: 0.3226  data: 0.0062  max mem: 9310
+[15:12:08.969327] Epoch: [72]  [21/22]  eta: 0:00:00  lr: 0.005395  loss: 1.1720 (1.1830)  time: 0.3223  data: 0.0062  max mem: 9310
+[15:12:09.055696] Epoch: [72] Total time: 0:00:08 (0.3713 s / it)
+[15:12:09.055766] Averaged stats: lr: 0.005395  loss: 1.1720 (1.1830)
+[15:12:14.683736] Test:  [0/6]  eta: 0:00:07  loss: 1.6384 (1.6384)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.1931  data: 1.0963  max mem: 9310
+[15:12:15.155426] Test:  [5/6]  eta: 0:00:00  loss: 0.6617 (1.2231)  acc1: 25.7812 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.2773  data: 0.1842  max mem: 9310
+[15:12:15.215184] Test: Total time: 0:00:01 (0.2883 s / it)
+[15:12:15.215244] * Acc@1 55.662 Acc@5 100.000 loss 1.223
+[15:12:15.215353] Accuracy of the network on the 733 test images: 55.7%
+[15:12:15.215364] Max accuracy: 55.80%
+[15:12:15.222926] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:12:16.692826] Epoch: [73]  [ 0/22]  eta: 0:00:32  lr: 0.005367  loss: 1.1862 (1.1862)  time: 1.4671  data: 1.1444  max mem: 9310
+[15:12:23.258198] Epoch: [73]  [20/22]  eta: 0:00:00  lr: 0.004827  loss: 1.1740 (1.1889)  time: 0.3282  data: 0.0124  max mem: 9310
+[15:12:23.572801] Epoch: [73]  [21/22]  eta: 0:00:00  lr: 0.004801  loss: 1.1740 (1.1850)  time: 0.3159  data: 0.0003  max mem: 9310
+[15:12:23.660164] Epoch: [73] Total time: 0:00:08 (0.3835 s / it)
+[15:12:23.660237] Averaged stats: lr: 0.004801  loss: 1.1740 (1.1850)
+[15:12:29.280803] Test:  [0/6]  eta: 0:00:07  loss: 1.6404 (1.6404)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2009  data: 1.0994  max mem: 9310
+[15:12:29.754930] Test:  [5/6]  eta: 0:00:00  loss: 0.6636 (1.2230)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2791  data: 0.1848  max mem: 9310
+[15:12:29.803800] Test: Total time: 0:00:01 (0.2882 s / it)
+[15:12:29.803850] * Acc@1 55.798 Acc@5 100.000 loss 1.223
+[15:12:29.803960] Accuracy of the network on the 733 test images: 55.8%
+[15:12:29.803969] Max accuracy: 55.80%
+[15:12:29.812401] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:12:31.385746] Epoch: [74]  [ 0/22]  eta: 0:00:34  lr: 0.004775  loss: 1.1633 (1.1633)  time: 1.5725  data: 1.2498  max mem: 9310
+[15:12:37.860148] Epoch: [74]  [20/22]  eta: 0:00:00  lr: 0.004263  loss: 1.1763 (1.1885)  time: 0.3237  data: 0.0065  max mem: 9310
+[15:12:38.178786] Epoch: [74]  [21/22]  eta: 0:00:00  lr: 0.004238  loss: 1.1763 (1.1856)  time: 0.3226  data: 0.0056  max mem: 9310
+[15:12:38.258605] Epoch: [74] Total time: 0:00:08 (0.3839 s / it)
+[15:12:38.258688] Averaged stats: lr: 0.004238  loss: 1.1763 (1.1856)
+[15:12:46.405018] Test:  [0/6]  eta: 0:00:08  loss: 1.6373 (1.6373)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.3939  data: 1.2972  max mem: 9310
+[15:12:46.878159] Test:  [5/6]  eta: 0:00:00  loss: 0.6648 (1.2239)  acc1: 25.7812 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.3111  data: 0.2178  max mem: 9310
+[15:12:46.931967] Test: Total time: 0:00:01 (0.3211 s / it)
+[15:12:46.932025] * Acc@1 55.662 Acc@5 100.000 loss 1.224
+[15:12:46.932133] Accuracy of the network on the 733 test images: 55.7%
+[15:12:46.932143] Max accuracy: 55.80%
+[15:12:46.939344] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:12:48.550910] Epoch: [75]  [ 0/22]  eta: 0:00:35  lr: 0.004213  loss: 1.1964 (1.1964)  time: 1.6107  data: 1.2845  max mem: 9310
+[15:12:54.909419] Epoch: [75]  [20/22]  eta: 0:00:00  lr: 0.003731  loss: 1.1878 (1.1903)  time: 0.3179  data: 0.0007  max mem: 9310
+[15:12:55.225305] Epoch: [75]  [21/22]  eta: 0:00:00  lr: 0.003707  loss: 1.1878 (1.1866)  time: 0.3175  data: 0.0007  max mem: 9310
+[15:12:55.303764] Epoch: [75] Total time: 0:00:08 (0.3802 s / it)
+[15:12:55.303837] Averaged stats: lr: 0.003707  loss: 1.1878 (1.1866)
+[15:13:01.440782] Test:  [0/6]  eta: 0:00:07  loss: 1.6332 (1.6332)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2509  data: 1.1544  max mem: 9310
+[15:13:01.913731] Test:  [5/6]  eta: 0:00:00  loss: 0.6665 (1.2223)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2872  data: 0.1940  max mem: 9310
+[15:13:01.979859] Test: Total time: 0:00:01 (0.2993 s / it)
+[15:13:01.979910] * Acc@1 55.525 Acc@5 100.000 loss 1.222
+[15:13:01.980016] Accuracy of the network on the 733 test images: 55.5%
+[15:13:01.980025] Max accuracy: 55.80%
+[15:13:01.986529] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:13:03.422187] Epoch: [76]  [ 0/22]  eta: 0:00:31  lr: 0.003684  loss: 1.2063 (1.2063)  time: 1.4348  data: 1.1093  max mem: 9310
+[15:13:09.851357] Epoch: [76]  [20/22]  eta: 0:00:00  lr: 0.003231  loss: 1.1748 (1.1843)  time: 0.3214  data: 0.0043  max mem: 9310
+[15:13:10.168748] Epoch: [76]  [21/22]  eta: 0:00:00  lr: 0.003209  loss: 1.1748 (1.1815)  time: 0.3176  data: 0.0011  max mem: 9310
+[15:13:10.254872] Epoch: [76] Total time: 0:00:08 (0.3758 s / it)
+[15:13:10.254945] Averaged stats: lr: 0.003209  loss: 1.1748 (1.1815)
+[15:13:18.306066] Test:  [0/6]  eta: 0:00:07  loss: 1.6405 (1.6405)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.2385  data: 1.1369  max mem: 9310
+[15:13:18.771207] Test:  [5/6]  eta: 0:00:00  loss: 0.6603 (1.2226)  acc1: 25.7812 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.2838  data: 0.1896  max mem: 9310
+[15:13:18.833551] Test: Total time: 0:00:01 (0.2952 s / it)
+[15:13:18.833601] * Acc@1 55.662 Acc@5 100.000 loss 1.223
+[15:13:18.833702] Accuracy of the network on the 733 test images: 55.7%
+[15:13:18.833712] Max accuracy: 55.80%
+[15:13:18.840932] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:13:20.314880] Epoch: [77]  [ 0/22]  eta: 0:00:32  lr: 0.003188  loss: 1.2016 (1.2016)  time: 1.4716  data: 1.1480  max mem: 9310
+[15:13:26.700061] Epoch: [77]  [20/22]  eta: 0:00:00  lr: 0.002765  loss: 1.1848 (1.1922)  time: 0.3192  data: 0.0031  max mem: 9310
+[15:13:27.015408] Epoch: [77]  [21/22]  eta: 0:00:00  lr: 0.002745  loss: 1.1848 (1.1893)  time: 0.3191  data: 0.0031  max mem: 9310
+[15:13:27.096586] Epoch: [77] Total time: 0:00:08 (0.3753 s / it)
+[15:13:27.096657] Averaged stats: lr: 0.002745  loss: 1.1848 (1.1893)
+[15:13:32.668976] Test:  [0/6]  eta: 0:00:07  loss: 1.6345 (1.6345)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.1768  data: 1.0803  max mem: 9310
+[15:13:33.156239] Test:  [5/6]  eta: 0:00:00  loss: 0.6643 (1.2225)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2772  data: 0.1842  max mem: 9310
+[15:13:33.213332] Test: Total time: 0:00:01 (0.2879 s / it)
+[15:13:33.213382] * Acc@1 55.798 Acc@5 100.000 loss 1.222
+[15:13:33.213485] Accuracy of the network on the 733 test images: 55.8%
+[15:13:33.213495] Max accuracy: 55.80%
+[15:13:33.220820] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:13:34.951544] Epoch: [78]  [ 0/22]  eta: 0:00:38  lr: 0.002725  loss: 1.1998 (1.1998)  time: 1.7300  data: 1.3969  max mem: 9310
+[15:13:41.280291] Epoch: [78]  [20/22]  eta: 0:00:00  lr: 0.002334  loss: 1.1819 (1.1934)  time: 0.3164  data: 0.0001  max mem: 9310
+[15:13:41.595385] Epoch: [78]  [21/22]  eta: 0:00:00  lr: 0.002315  loss: 1.1819 (1.1901)  time: 0.3162  data: 0.0001  max mem: 9310
+[15:13:41.676688] Epoch: [78] Total time: 0:00:08 (0.3844 s / it)
+[15:13:41.676764] Averaged stats: lr: 0.002315  loss: 1.1819 (1.1901)
+[15:13:47.542360] Test:  [0/6]  eta: 0:00:08  loss: 1.6422 (1.6422)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.3851  data: 1.2885  max mem: 9310
+[15:13:48.005075] Test:  [5/6]  eta: 0:00:00  loss: 0.6611 (1.2229)  acc1: 25.7812 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.3078  data: 0.2149  max mem: 9310
+[15:13:48.055388] Test: Total time: 0:00:01 (0.3165 s / it)
+[15:13:48.055447] * Acc@1 55.662 Acc@5 100.000 loss 1.223
+[15:13:48.055579] Accuracy of the network on the 733 test images: 55.7%
+[15:13:48.055589] Max accuracy: 55.80%
+[15:13:48.063836] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:13:49.713472] Epoch: [79]  [ 0/22]  eta: 0:00:36  lr: 0.002296  loss: 1.2115 (1.2115)  time: 1.6488  data: 1.3233  max mem: 9310
+[15:13:56.042427] Epoch: [79]  [20/22]  eta: 0:00:00  lr: 0.001937  loss: 1.1716 (1.1875)  time: 0.3164  data: 0.0003  max mem: 9310
+[15:13:56.357843] Epoch: [79]  [21/22]  eta: 0:00:00  lr: 0.001920  loss: 1.1716 (1.1848)  time: 0.3163  data: 0.0003  max mem: 9310
+[15:13:56.453070] Epoch: [79] Total time: 0:00:08 (0.3813 s / it)
+[15:13:56.453140] Averaged stats: lr: 0.001920  loss: 1.1716 (1.1848)
+[15:14:02.460766] Test:  [0/6]  eta: 0:00:07  loss: 1.6303 (1.6303)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2954  data: 1.1938  max mem: 9310
+[15:14:02.945325] Test:  [5/6]  eta: 0:00:00  loss: 0.6681 (1.2224)  acc1: 25.7812 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.2965  data: 0.2006  max mem: 9310
+[15:14:03.001879] Test: Total time: 0:00:01 (0.3071 s / it)
+[15:14:03.001936] * Acc@1 55.662 Acc@5 100.000 loss 1.222
+[15:14:03.002051] Accuracy of the network on the 733 test images: 55.7%
+[15:14:03.002061] Max accuracy: 55.80%
+[15:14:03.009409] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:14:04.617646] Epoch: [80]  [ 0/22]  eta: 0:00:35  lr: 0.001903  loss: 1.2022 (1.2022)  time: 1.6022  data: 1.2689  max mem: 9310
+[15:14:11.119980] Epoch: [80]  [20/22]  eta: 0:00:00  lr: 0.001576  loss: 1.1724 (1.1869)  time: 0.3251  data: 0.0089  max mem: 9310
+[15:14:11.436095] Epoch: [80]  [21/22]  eta: 0:00:00  lr: 0.001561  loss: 1.1724 (1.1856)  time: 0.3249  data: 0.0089  max mem: 9310
+[15:14:11.530570] Epoch: [80] Total time: 0:00:08 (0.3873 s / it)
+[15:14:11.530648] Averaged stats: lr: 0.001561  loss: 1.1724 (1.1856)
+[15:14:17.139605] Test:  [0/6]  eta: 0:00:07  loss: 1.6389 (1.6389)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2824  data: 1.1856  max mem: 9310
+[15:14:17.613020] Test:  [5/6]  eta: 0:00:00  loss: 0.6632 (1.2225)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2925  data: 0.1992  max mem: 9310
+[15:14:17.670625] Test: Total time: 0:00:01 (0.3033 s / it)
+[15:14:17.670679] * Acc@1 55.798 Acc@5 100.000 loss 1.223
+[15:14:17.670798] Accuracy of the network on the 733 test images: 55.8%
+[15:14:17.670809] Max accuracy: 55.80%
+[15:14:17.678657] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:14:19.103858] Epoch: [81]  [ 0/22]  eta: 0:00:31  lr: 0.001545  loss: 1.1869 (1.1869)  time: 1.4218  data: 1.0971  max mem: 9310
+[15:14:25.675512] Epoch: [81]  [20/22]  eta: 0:00:00  lr: 0.001251  loss: 1.1787 (1.1850)  time: 0.3285  data: 0.0129  max mem: 9310
+[15:14:25.991898] Epoch: [81]  [21/22]  eta: 0:00:00  lr: 0.001237  loss: 1.1816 (1.1848)  time: 0.3196  data: 0.0041  max mem: 9310
+[15:14:26.085713] Epoch: [81] Total time: 0:00:08 (0.3821 s / it)
+[15:14:26.085782] Averaged stats: lr: 0.001237  loss: 1.1816 (1.1848)
+[15:14:31.704572] Test:  [0/6]  eta: 0:00:07  loss: 1.6389 (1.6389)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.2955  data: 1.1986  max mem: 9310
+[15:14:32.167630] Test:  [5/6]  eta: 0:00:00  loss: 0.6622 (1.2224)  acc1: 25.7812 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.2930  data: 0.1999  max mem: 9310
+[15:14:32.237410] Test: Total time: 0:00:01 (0.3057 s / it)
+[15:14:32.237468] * Acc@1 55.662 Acc@5 100.000 loss 1.222
+[15:14:32.237617] Accuracy of the network on the 733 test images: 55.7%
+[15:14:32.237628] Max accuracy: 55.80%
+[15:14:32.244367] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:14:33.776758] Epoch: [82]  [ 0/22]  eta: 0:00:33  lr: 0.001224  loss: 1.2075 (1.2075)  time: 1.5315  data: 1.2054  max mem: 9310
+[15:14:40.219737] Epoch: [82]  [20/22]  eta: 0:00:00  lr: 0.000963  loss: 1.1779 (1.1874)  time: 0.3221  data: 0.0058  max mem: 9310
+[15:14:40.535553] Epoch: [82]  [21/22]  eta: 0:00:00  lr: 0.000951  loss: 1.1779 (1.1854)  time: 0.3217  data: 0.0058  max mem: 9310
+[15:14:40.623102] Epoch: [82] Total time: 0:00:08 (0.3808 s / it)
+[15:14:40.623173] Averaged stats: lr: 0.000951  loss: 1.1779 (1.1854)
+[15:14:46.745811] Test:  [0/6]  eta: 0:00:06  loss: 1.6352 (1.6352)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.1554  data: 1.0590  max mem: 9310
+[15:14:47.215897] Test:  [5/6]  eta: 0:00:00  loss: 0.6640 (1.2221)  acc1: 25.7812 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.2708  data: 0.1778  max mem: 9310
+[15:14:47.267685] Test: Total time: 0:00:01 (0.2803 s / it)
+[15:14:47.267735] * Acc@1 55.662 Acc@5 100.000 loss 1.222
+[15:14:47.267842] Accuracy of the network on the 733 test images: 55.7%
+[15:14:47.267853] Max accuracy: 55.80%
+[15:14:47.275457] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:14:48.672971] Epoch: [83]  [ 0/22]  eta: 0:00:30  lr: 0.000939  loss: 1.1616 (1.1616)  time: 1.3967  data: 1.0736  max mem: 9310
+[15:14:55.049070] Epoch: [83]  [20/22]  eta: 0:00:00  lr: 0.000712  loss: 1.1777 (1.1891)  time: 0.3188  data: 0.0038  max mem: 9310
+[15:14:55.366150] Epoch: [83]  [21/22]  eta: 0:00:00  lr: 0.000701  loss: 1.1777 (1.1873)  time: 0.3161  data: 0.0009  max mem: 9310
+[15:14:55.463855] Epoch: [83] Total time: 0:00:08 (0.3722 s / it)
+[15:14:55.463924] Averaged stats: lr: 0.000701  loss: 1.1777 (1.1873)
+[15:15:01.251734] Test:  [0/6]  eta: 0:00:07  loss: 1.6391 (1.6391)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.2622  data: 1.1604  max mem: 9310
+[15:15:01.730727] Test:  [5/6]  eta: 0:00:00  loss: 0.6631 (1.2226)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2901  data: 0.1950  max mem: 9310
+[15:15:01.784120] Test: Total time: 0:00:01 (0.3001 s / it)
+[15:15:01.784172] * Acc@1 55.798 Acc@5 100.000 loss 1.223
+[15:15:01.784285] Accuracy of the network on the 733 test images: 55.8%
+[15:15:01.784296] Max accuracy: 55.80%
+[15:15:01.792174] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:15:03.102980] Epoch: [84]  [ 0/22]  eta: 0:00:28  lr: 0.000691  loss: 1.1853 (1.1853)  time: 1.3099  data: 0.9849  max mem: 9310
+[15:15:09.636627] Epoch: [84]  [20/22]  eta: 0:00:00  lr: 0.000498  loss: 1.1961 (1.1889)  time: 0.3266  data: 0.0113  max mem: 9310
+[15:15:09.953962] Epoch: [84]  [21/22]  eta: 0:00:00  lr: 0.000489  loss: 1.1961 (1.1868)  time: 0.3237  data: 0.0085  max mem: 9310
+[15:15:10.042282] Epoch: [84] Total time: 0:00:08 (0.3750 s / it)
+[15:15:10.042348] Averaged stats: lr: 0.000489  loss: 1.1961 (1.1868)
+[15:15:15.748966] Test:  [0/6]  eta: 0:00:07  loss: 1.6289 (1.6289)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.1784  data: 1.0810  max mem: 9310
+[15:15:16.234880] Test:  [5/6]  eta: 0:00:00  loss: 0.6684 (1.2220)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2772  data: 0.1841  max mem: 9310
+[15:15:16.291119] Test: Total time: 0:00:01 (0.2877 s / it)
+[15:15:16.291169] * Acc@1 55.525 Acc@5 100.000 loss 1.222
+[15:15:16.291285] Accuracy of the network on the 733 test images: 55.5%
+[15:15:16.291295] Max accuracy: 55.80%
+[15:15:16.299738] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:15:18.161253] Epoch: [85]  [ 0/22]  eta: 0:00:40  lr: 0.000480  loss: 1.1581 (1.1581)  time: 1.8607  data: 1.5405  max mem: 9310
+[15:15:24.492882] Epoch: [85]  [20/22]  eta: 0:00:00  lr: 0.000322  loss: 1.1843 (1.1916)  time: 0.3165  data: 0.0003  max mem: 9310
+[15:15:24.809130] Epoch: [85]  [21/22]  eta: 0:00:00  lr: 0.000315  loss: 1.1843 (1.1886)  time: 0.3162  data: 0.0003  max mem: 9310
+[15:15:24.883644] Epoch: [85] Total time: 0:00:08 (0.3902 s / it)
+[15:15:24.883715] Averaged stats: lr: 0.000315  loss: 1.1843 (1.1886)
+[15:15:31.007642] Test:  [0/6]  eta: 0:00:07  loss: 1.6388 (1.6388)  acc1: 16.4062 (16.4062)  acc5: 100.0000 (100.0000)  time: 1.2913  data: 1.1947  max mem: 9310
+[15:15:31.471976] Test:  [5/6]  eta: 0:00:00  loss: 0.6637 (1.2228)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2925  data: 0.1992  max mem: 9310
+[15:15:31.526745] Test: Total time: 0:00:01 (0.3025 s / it)
+[15:15:31.526802] * Acc@1 55.525 Acc@5 100.000 loss 1.223
+[15:15:31.526911] Accuracy of the network on the 733 test images: 55.5%
+[15:15:31.526921] Max accuracy: 55.80%
+[15:15:31.535443] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:15:33.000124] Epoch: [86]  [ 0/22]  eta: 0:00:32  lr: 0.000308  loss: 1.1916 (1.1916)  time: 1.4638  data: 1.1378  max mem: 9310
+[15:15:39.446741] Epoch: [86]  [20/22]  eta: 0:00:00  lr: 0.000184  loss: 1.1740 (1.1882)  time: 0.3223  data: 0.0057  max mem: 9310
+[15:15:39.762628] Epoch: [86]  [21/22]  eta: 0:00:00  lr: 0.000179  loss: 1.1740 (1.1858)  time: 0.3219  data: 0.0057  max mem: 9310
+[15:15:39.845863] Epoch: [86] Total time: 0:00:08 (0.3777 s / it)
+[15:15:39.845933] Averaged stats: lr: 0.000179  loss: 1.1740 (1.1858)
+[15:15:45.726375] Test:  [0/6]  eta: 0:00:07  loss: 1.6461 (1.6461)  acc1: 16.4062 (16.4062)  acc5: 100.0000 (100.0000)  time: 1.2161  data: 1.1148  max mem: 9310
+[15:15:46.217058] Test:  [5/6]  eta: 0:00:00  loss: 0.6598 (1.2235)  acc1: 25.7812 (55.5252)  acc5: 100.0000 (100.0000)  time: 0.2844  data: 0.1893  max mem: 9310
+[15:15:46.286788] Test: Total time: 0:00:01 (0.2969 s / it)
+[15:15:46.286842] * Acc@1 55.525 Acc@5 100.000 loss 1.223
+[15:15:46.286940] Accuracy of the network on the 733 test images: 55.5%
+[15:15:46.286949] Max accuracy: 55.80%
+[15:15:46.296676] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:15:47.984965] Epoch: [87]  [ 0/22]  eta: 0:00:37  lr: 0.000173  loss: 1.2004 (1.2004)  time: 1.6874  data: 1.3628  max mem: 9310
+[15:15:54.468567] Epoch: [87]  [20/22]  eta: 0:00:00  lr: 0.000084  loss: 1.1842 (1.1971)  time: 0.3241  data: 0.0082  max mem: 9310
+[15:15:54.784698] Epoch: [87]  [21/22]  eta: 0:00:00  lr: 0.000081  loss: 1.1842 (1.1954)  time: 0.3162  data: 0.0004  max mem: 9310
+[15:15:54.876387] Epoch: [87] Total time: 0:00:08 (0.3900 s / it)
+[15:15:54.876457] Averaged stats: lr: 0.000081  loss: 1.1842 (1.1954)
+[15:16:00.248160] Test:  [0/6]  eta: 0:00:07  loss: 1.6375 (1.6375)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.3230  data: 1.2263  max mem: 9310
+[15:16:00.712001] Test:  [5/6]  eta: 0:00:00  loss: 0.6642 (1.2222)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.2977  data: 0.2045  max mem: 9310
+[15:16:00.761437] Test: Total time: 0:00:01 (0.3069 s / it)
+[15:16:00.761487] * Acc@1 55.798 Acc@5 100.000 loss 1.222
+[15:16:00.761584] Accuracy of the network on the 733 test images: 55.8%
+[15:16:00.761594] Max accuracy: 55.80%
+[15:16:00.770888] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:16:02.292464] Epoch: [88]  [ 0/22]  eta: 0:00:33  lr: 0.000077  loss: 1.2038 (1.2038)  time: 1.5207  data: 1.1993  max mem: 9310
+[15:16:08.776473] Epoch: [88]  [20/22]  eta: 0:00:00  lr: 0.000023  loss: 1.1846 (1.1913)  time: 0.3242  data: 0.0085  max mem: 9310
+[15:16:09.092525] Epoch: [88]  [21/22]  eta: 0:00:00  lr: 0.000021  loss: 1.1846 (1.1882)  time: 0.3160  data: 0.0006  max mem: 9310
+[15:16:09.187028] Epoch: [88] Total time: 0:00:08 (0.3825 s / it)
+[15:16:09.187093] Averaged stats: lr: 0.000021  loss: 1.1846 (1.1882)
+[15:16:14.531792] Test:  [0/6]  eta: 0:00:07  loss: 1.6419 (1.6419)  acc1: 17.1875 (17.1875)  acc5: 100.0000 (100.0000)  time: 1.3199  data: 1.2232  max mem: 9310
+[15:16:15.014666] Test:  [5/6]  eta: 0:00:00  loss: 0.6601 (1.2228)  acc1: 25.7812 (55.6617)  acc5: 100.0000 (100.0000)  time: 0.3003  data: 0.2073  max mem: 9310
+[15:16:15.075880] Test: Total time: 0:00:01 (0.3115 s / it)
+[15:16:15.075929] * Acc@1 55.662 Acc@5 100.000 loss 1.223
+[15:16:15.076030] Accuracy of the network on the 733 test images: 55.7%
+[15:16:15.076040] Max accuracy: 55.80%
+[15:16:15.089138] log_dir: /hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised
+[15:16:16.542465] Epoch: [89]  [ 0/22]  eta: 0:00:31  lr: 0.000019  loss: 1.1899 (1.1899)  time: 1.4523  data: 1.1268  max mem: 9310
+[15:16:23.197416] Epoch: [89]  [20/22]  eta: 0:00:00  lr: 0.000000  loss: 1.1893 (1.1905)  time: 0.3327  data: 0.0176  max mem: 9310
+[15:16:23.515111] Epoch: [89]  [21/22]  eta: 0:00:00  lr: 0.000000  loss: 1.1893 (1.1890)  time: 0.3150  data: 0.0001  max mem: 9310
+[15:16:23.609772] Epoch: [89] Total time: 0:00:08 (0.3873 s / it)
+[15:16:23.609843] Averaged stats: lr: 0.000000  loss: 1.1893 (1.1890)
+[15:16:29.178929] Test:  [0/6]  eta: 0:00:08  loss: 1.6336 (1.6336)  acc1: 17.9688 (17.9688)  acc5: 100.0000 (100.0000)  time: 1.4553  data: 1.3543  max mem: 9310
+[15:16:29.652855] Test:  [5/6]  eta: 0:00:00  loss: 0.6652 (1.2224)  acc1: 25.7812 (55.7981)  acc5: 100.0000 (100.0000)  time: 0.3214  data: 0.2271  max mem: 9310
+[15:16:29.702102] Test: Total time: 0:00:01 (0.3306 s / it)
+[15:16:29.702156] * Acc@1 55.798 Acc@5 100.000 loss 1.222
+[15:16:29.702275] Accuracy of the network on the 733 test images: 55.8%
+[15:16:29.702285] Max accuracy: 55.80%
+[15:16:29.710418] Training time 0:23:06

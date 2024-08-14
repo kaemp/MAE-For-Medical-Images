@@ -16,6 +16,7 @@ import numpy as np
 import os
 import time
 from pathlib import Path
+import gc
 
 import torch
 import torch.backends.cudnn as cudnn
@@ -67,7 +68,7 @@ def get_args_parser():
                         help='epochs to warmup LR')
 
     # * Finetuning params
-    parser.add_argument('--finetune', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/original_mask_ratio_.75/checkpoint-399.pth',
+    parser.add_argument('--finetune', default='',
                         help='finetune from checkpoint')
     parser.add_argument('--global_pool', action='store_true')
     parser.set_defaults(global_pool=False)
@@ -80,9 +81,9 @@ def get_args_parser():
     parser.add_argument('--nb_classes', default=5, type=int,
                         help='number of the classification types')
 
-    parser.add_argument('--output_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/original_mask_ratio_.75/linprobe',
+    parser.add_argument('--output_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised',
                         help='path where to save, empty for no saving')
-    parser.add_argument('--log_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/original_mask_ratio_.75/linprobe',
+    parser.add_argument('--log_dir', default='/hpctmp/pbs_dm_stage/access_temp_stage/e1100476/Model/MAE/supervised',
                         help='path where to tensorboard log')
     parser.add_argument('--device', default='cuda',
                         help='device to use for training / testing')
@@ -114,12 +115,15 @@ def get_args_parser():
 
 
 def main(args):
+
     misc.init_distributed_mode(args)
 
     print('job dir: {}'.format(os.path.dirname(os.path.realpath(__file__))))
     print("{}".format(args).replace(', ', ',\n'))
 
     device = torch.device(args.device)
+
+    
 
     # fix the seed for reproducibility
     seed = args.seed + misc.get_rank()
@@ -220,11 +224,6 @@ def main(args):
     # for linear prob only
     # hack: revise model's head with BN
     model.head = torch.nn.Sequential(torch.nn.BatchNorm1d(model.head.in_features, affine=False, eps=1e-6), model.head)
-    # freeze all but the head
-    for _, p in model.named_parameters():
-        p.requires_grad = False
-    for _, p in model.head.named_parameters():
-        p.requires_grad = True
 
     model.to(device)
 
